@@ -48,21 +48,31 @@ char	**split_delimiter_func(char *str, char delimiter, char **pipe_split, int *n
 	while(str[i])
 	{
 		if(str[i] == '\'')
-			while(str[++i] != '\'');
+		{
+			i++;
+			while(str[i] && str[i] != '\'')
+				i++;
+		}
 		else if(str[i] == '\"')
-			while(str[++i] != '\"');
+		{
+			i++;
+			while(str[i] && str[i] != '\"')
+				i++;
+		}
 		if(str[i] == delimiter || str[i + 1] == '\0')
 		{
-			if(i = 0 && str[i] == delimiter)
+			int length = str_len(str);
+			if(i == length - 1 && str[i] == delimiter)
 			{
 				write(2, "syntax error\n", 14);
-				return (0);
+				exit(EXIT_FAILURE);
 			}
 			dif = i - j;
 			if(str[i + 1] == '\0')
 				dif = i - j + 1;
-			if(str[i] == '\'')
-				dif -= 1;
+			// why u did this
+			// if(str[i] == '\'')
+			// 	dif -= 1;
 			k = 0;
 			pipe_split[index] = (char *)malloc(dif + 1);
 			while(k < dif)

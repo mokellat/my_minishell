@@ -37,7 +37,7 @@ int	multiple_red(char *str)
 					return (0);
 				return (1);
 			}
-			i++;
+			// i++;
 			while((str[i] == '>' || str[i] == '<'))
 			{
 				i++;

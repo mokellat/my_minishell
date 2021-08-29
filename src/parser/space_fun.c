@@ -132,11 +132,11 @@ t_cmd	*space_delimiter_func(char **str, char *delimiter, int num_strct)
 	x = 0;
 	y = 0;
 	final_str = malloc(sizeof(t_cmd) * num_strct);
-	if(!ft_strcmp(str[0], "|"))
-	{
-		write(2, "syntax error\n", 14);
-		exit(EXIT_FAILURE);
-	}
+	// if(!ft_strcmp(str[0], "|"))
+	// {
+	// 	write(2, "syntax error\n", 14);
+	// 	exit(EXIT_FAILURE);
+	// }
 	while(str[i])
 	{
 		j = 0;
@@ -202,12 +202,12 @@ t_cmd	*space_delimiter_func(char **str, char *delimiter, int num_strct)
 				// isquoted dont stop when finding space
 				if(final_str[index].files[files_i].is_quoted)
 				{
-					if(final_str[index].files[files_i].is_quoted = SINGLE_QUOTE)
+					if(final_str[index].files[files_i].is_quoted == SINGLE_QUOTE)
 					{
 						while(str[i][j] && str[i][j] != '\'') //differenciate between single quote and double quote
 							final_str[index].files[files_i].name[redi_lenght++] = str[i][j++];
 					}
-					else if(final_str[index].files[files_i].is_quoted = DOUBLE_QUOTE)
+					else if(final_str[index].files[files_i].is_quoted == DOUBLE_QUOTE)
 					{
 						while(str[i][j] && str[i][j] != '\"') //differenciate between single quote and double quote
 							final_str[index].files[files_i].name[redi_lenght++] = str[i][j++];

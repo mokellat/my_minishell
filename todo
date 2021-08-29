@@ -1,16 +1,15 @@
 PARSING:
 
     - 'l''s' not working
-
+    
     - consider those as a syntax error
-        - "|"
-        - "cmd |"
+        - "cmd |": done
+        - "|" : done
         - "> >" : done
         - "< <" : done
         - "< >" : done
         - ">" : done
         - "<" : done
-
     - echo hey << "1" [must differ ' from "] : checked and done
  
 EXEC:

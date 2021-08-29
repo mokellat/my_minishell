@@ -37,7 +37,7 @@ READLINE_FLAGS  = -L/usr/include -lreadline
 all: $(NAME)
 
 $(NAME): $(SRC)
-	@$(CC) ${FLAGS} -I include $(READLINE_FLAGS)  $(SRC)  -lreadline  -o $(NAME) -g
+	@$(CC) ${FLAGS} -I include $(READLINE_FLAGS)  $(SRC)  -lreadline  -o $(NAME) -fsanitize=address -g
 	@rm -rf *.o
 
 san :
