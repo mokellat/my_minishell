@@ -1,6 +1,6 @@
 PARSING:
 
-    - 'l''s' not working
+    - 'l''s' not working : done
     
     - consider those as a syntax error
         - "cmd |": done

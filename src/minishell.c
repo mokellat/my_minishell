@@ -6,7 +6,7 @@
 /*   By: mokellat <mokellat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 16:50:19 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/08/29 17:42:58 by mokellat         ###   ########.fr       */
+/*   Updated: 2021/08/30 17:51:22 by mokellat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	main(void)
 	// mystr = " 'echo'ali    >       bro         a hey ";
 	// mystr = "echo \"|\" |" ; // we should take it as syntax error
 	// mystr = "|" ; // syntax error
-	mystr = "'l''s' ali >> 1 | echo 'Mohammmed ali kellati' | cat -e" ; // syntax error
+	mystr = "'l''s' ali << 1 | echo 'Mohammmed ali kellati' | cat -e" ; // syntax error
 	// mystr = "echo \"$HOME\" | echo '$HOME' | echo $HOME" ; // syntax error
 	// mystr = "echo 4$a";
 	// mystr = " 'echo' ali >> name | \'$a\' << '\"name' | 'ali is the best' | cat <1>"; fix this bro

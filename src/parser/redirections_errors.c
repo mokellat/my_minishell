@@ -12,41 +12,46 @@
 
 #include "minishell.h"
 
-int	multiple_red(char *str)
+int	redi_exec(int i, char *str, int *index)
 {
-	int i;
-	int index;
-
-	i = 0;
-	index = 0;
-	while(i < (int)strlen(str))
+	while (i < (int)strlen(str))
 	{
-		if(str[i] == '>' && str[i + 1] == '<')
+		if (str[i] == '>' && str[i + 1] == '<')
 			return (0);
-		if(str[i] == '<' && str[i + 1] == '>')
+		if (str[i] == '<' && str[i + 1] == '>')
 			return (0);
-		if(str[i] == '>' || str[i] == '<')
+		if (str[i] == '>' || str[i] == '<')
 		{
 			i++;
-			if(str[i] == ' ' && str[i])
+			if (str[i] == ' ' && str[i])
 			{
-				// i++;
-				while(str[i] && str[i] == ' ')
+				while (str[i] && str[i] == ' ')
 					i++;
-				if(str[i] == '>' || str[i] == '<')
+				if (str[i] == '>' || str[i] == '<')
 					return (0);
 				return (1);
 			}
-			// i++;
-			while((str[i] == '>' || str[i] == '<'))
+			while ((str[i] == '>' || str[i] == '<'))
 			{
 				i++;
-				index++;
+				(*index)++;
 			}
 		}
 		i++;
 	}
-	if(index > 1)
+	return (1);
+}
+
+int	multiple_red(char *str)
+{
+	int	i;
+	int	index;
+
+	i = 0;
+	index = 0;
+	if (!redi_exec(i, str, &index))
+		return (0);
+	if (index > 1)
 		return (0);
 	else
 		return (1);
@@ -58,18 +63,22 @@ int	open_quotes(char *str)
 	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
-		if(str[i] == '\'')
+		if (str[i] == '\'')
 		{
-			while(str[i] && str[++i] != '\'');
-			if(!str[i])
+			i++;
+			while (str[i] && str[i] != '\'')
+				i++;
+			if (!str[i])
 				return (0);
 		}
-		else if(str[i] == '\"')
+		else if (str[i] == '\"')
 		{
-			while(str[i] && str[++i] != '\"');
-			if(!str[i])
+			i++;
+			while (str[i] && str[i] != '\"')
+				i++;
+			if (!str[i])
 				return (0);
 		}
 		i++;
