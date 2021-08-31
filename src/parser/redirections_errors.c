@@ -14,7 +14,7 @@
 
 int	redi_exec(int i, char *str, int *index)
 {
-	while (i < (int)strlen(str))
+	while (++i < (int)strlen(str))
 	{
 		if (str[i] == '>' && str[i + 1] == '<')
 			return (0);
@@ -37,7 +37,6 @@ int	redi_exec(int i, char *str, int *index)
 				(*index)++;
 			}
 		}
-		i++;
 	}
 	return (1);
 }
@@ -47,7 +46,7 @@ int	multiple_red(char *str)
 	int	i;
 	int	index;
 
-	i = 0;
+	i = -1;
 	index = 0;
 	if (!redi_exec(i, str, &index))
 		return (0);
@@ -62,8 +61,8 @@ int	open_quotes(char *str)
 {
 	int	i;
 
-	i = 0;
-	while (str[i])
+	i = -1;
+	while (str[++i])
 	{
 		if (str[i] == '\'')
 		{
@@ -81,7 +80,6 @@ int	open_quotes(char *str)
 			if (!str[i])
 				return (0);
 		}
-		i++;
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: mokellat <mokellat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 16:50:19 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/08/30 17:51:22 by mokellat         ###   ########.fr       */
+/*   Updated: 2021/08/31 18:07:37 by mokellat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,11 @@ t_shell	*shell_ref(t_shell *shell)
 // 	return (shell.exit_code);
 // }
 
-int	main(void)
+int	main(int ac, char **argv, char **env_vars)
 {
+	t_shell	shell;
+	shell_ref(&shell);
+	init_shell(&shell, env_vars);
 	char			*mystr;
 	t_split_pipe	pipe_split;
 	t_cmd			*final_str;
@@ -51,10 +54,13 @@ int	main(void)
 	// mystr = " 'echo'ali    >       bro         a hey ";
 	// mystr = "echo \"|\" |" ; // we should take it as syntax error
 	// mystr = "|" ; // syntax error
-	mystr = "'l''s' ali << 1 | echo 'Mohammmed ali kellati' | cat -e" ; // syntax error
+	mystr = "'l''s' ali >> \"1\" | echo 'Mohammmed ali kellati' | cat -e" ; // syntax error
 	// mystr = "echo \"$HOME\" | echo '$HOME' | echo $HOME" ; // syntax error
-	// mystr = "echo 4$a";
-	// mystr = " 'echo' ali >> name | \'$a\' << '\"name' | 'ali is the best' | cat <1>"; fix this bro
+	// mystr = "echo << a";
+	// mystr = "echo \"$s\"Make\'$s\'";
+	// mystr = "unset \"'\" test";
+	// mystr = "'$s'";
+	// mystr = " 'echo' ali >> name | \'$ça\' << '\"name' | 'ali is the best' | cat <1>"; fix this bro
 	if(!open_quotes(mystr))
 	{
 		write(2, "syntax error\n", 14);

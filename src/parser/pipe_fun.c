@@ -22,9 +22,17 @@ int	calcul_delimiter(char *str, char *delimiter)
 	while (str[i])
 	{
 		if (str[i] == '\'')
-			while (str[i + 1] && str[++i] != '\'');
+		{
+			i++;
+			while (str[i + 1] && str[i] != '\'')
+				i++;
+		}
 		else if (str[i] == '\"')
-			while (str[i + 1] && str[++i] != '\"');
+		{
+			i++;
+			while (str[i + 1] && str[i] != '\"')
+				i++;
+		}
 		if (ft_strrchr(delimiter, str[i]) || str[i + 1] == '\0')
 			index++;
 		i++;
@@ -32,13 +40,13 @@ int	calcul_delimiter(char *str, char *delimiter)
 	return (index);
 }
 
-void	delimiter_found(char *str, char **pipe_split, int i, char delimiter, int *index, int *j)
+void	delimiter_found(char *str, char **pipe_split, int i,
+char delimiter, int *index, int *j)
 {
 	int	dif;
 	int	k;
 
-	int length = str_len(str);
-	if (i == length - 1 && str[i] == delimiter)
+	if (i == (int)(str_len(str)) - 1 && str[i] == delimiter)
 	{
 		write(2, "syntax error\n", 14);
 		exit(EXIT_FAILURE);
@@ -51,11 +59,11 @@ void	delimiter_found(char *str, char **pipe_split, int i, char delimiter, int *i
 	while (k < dif)
 		pipe_split[*index][k++] = str[(*j)++];
 	pipe_split[*index][k] = '\0';
-	// *j = i + 1;
 	(*index)++;
 }
 
-char	**split_delimiter_func(char *str, char delimiter, char **pipe_split, int *num_tab)
+char	**split_delimiter_func(char *str, char delimiter, char **pipe_split,
+int *num_tab)
 {
 	int	i;
 	int	index;
@@ -65,7 +73,7 @@ char	**split_delimiter_func(char *str, char delimiter, char **pipe_split, int *n
 	index = 0;
 	j = 0;
 	*num_tab = calcul_delimiter(str, "|");
-	pipe_split = malloc(sizeof(char *) *  (*num_tab + 1));
+	pipe_split = malloc(sizeof(char *) * (*num_tab + 1));
 	while (str[i])
 	{
 		if (str[i] == '\'')
