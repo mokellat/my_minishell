@@ -30,15 +30,12 @@ t_cmd	*space_delimiter_func(char **str, char *delimiter, int num_strct)
 	int		k;
 	int		x;
 	int		y;
-	int		index;
 	t_cmd	*final_str;
 	int		redi_lenght;
-	int		redi_index;
 	int		files_i;
 
 	i = 0;
 	j = 0;
-	index = 0;
 	k = 0;
 	x = 0;
 	y = 0;
@@ -49,103 +46,34 @@ t_cmd	*space_delimiter_func(char **str, char *delimiter, int num_strct)
 		k = 0;
 		y = 0;
 		files_i = 0;
-		final_str[index].n = 1;
-		final_str[index].args = malloc(sizeof(char *) * (final_str[index].n));
-		final_str[index].files = malloc(sizeof(t_file) * 100);
-		final_str[index].files_count = 0;
+		final_str[i].n = 1;
+		final_str[i].args = malloc(sizeof(char *) * (final_str[i].n));
+		final_str[i].files = malloc(sizeof(t_file) * 100);
+		final_str[i].files_count = 0;
 		str[i] = ft_strtrim(str[i], " ");
 		while (j < (int)str_len(str[i]))
 		{
 			if (j > 0 && (str[i][j - 1] == '>' || str[i][j - 1] == '<'))
 			{
 				j--;
-				if (str[i][j] == '>')
-					final_str[index].files[files_i].type = RED_OUT;
-				else if (str[i][j] == '<')
-					final_str[index].files[files_i].type = RED_IN;
-				j++;
-				if (str[i][j] == '>')
-				{
-					final_str[index].files[files_i].type = RED_OUT_AP;
-					j++;
-				}
-				else if (str[i][j] == '<')
-				{
-					final_str[index].files[files_i].type = RED_IN_SOURCE;
-					j++;
-				}
-				while (str[i][j] && str[i][j] == ' ')
-					j++;
-				if (str[i][j] && (str[i][j] == '\'' || str[i][j] == '\"'))
-				{
-					if (str[i][j] == '\'')
-						final_str[index].files[files_i].is_quoted
-							= SINGLE_QUOTE;
-					else if (str[i][j] == '\"')
-						final_str[index].files[files_i].is_quoted
-							= DOUBLE_QUOTE;
-					j++;
-					redi_lenght = j;
-					while (str[i][redi_lenght] && str[i][redi_lenght] != '\'')
-						redi_lenght++;
-				}
-				else
-				{
-					redi_lenght = j;
-					final_str[index].files[files_i].is_quoted = 0;
-					while (str[i][redi_lenght] && str[i][redi_lenght] != ' ')
-						redi_lenght++;
-				}
-				final_str[index].files[files_i].name
+				redirections(i, &j, str, final_str, files_i);
+				quoted(str, i, &j, final_str,files_i, &redi_lenght);
+				final_str[i].files[files_i].name
 					= malloc(redi_lenght - j + 2);
 				redi_lenght = 0;
-				if (final_str[index].files[files_i].is_quoted)
-				{
-					if (final_str[index].files[files_i].is_quoted
-						== SINGLE_QUOTE)
-					{
-						while (str[i][j] && str[i][j] != '\'')
-							final_str[index].files[files_i].name[redi_lenght++]
-								= str[i][j++];
-					}
-					else if (final_str[index].files[files_i].is_quoted
-						== DOUBLE_QUOTE)
-					{
-						while (str[i][j] && str[i][j] != '\"')
-							final_str[index].files[files_i].name[redi_lenght++]
-								= str[i][j++];
-					}
-					j++;
-				}
-				else
-				{
-					while (str[i][j] && str[i][j] != ' ')
-						final_str[index].files[files_i].name[redi_lenght++]
-							= str[i][j++];
-				}
-				if (!ft_strcmp(final_str[index].files[files_i].name, "\0"))
+				is_quoted_assign(str, i, &j, final_str, &redi_lenght, files_i);
+				if (!ft_strcmp(final_str[i].files[files_i].name, "\0"))
 				{
 					write(2, "syntax error\n", 14);
 					exit(EXIT_FAILURE);
 				}
-				final_str[index].files[files_i].name[redi_lenght] = 0;
-				final_str[index].files[files_i].name
-					= ft_strtrim(final_str[index].files[files_i].name, "\'\"");
+				final_str[i].files[files_i].name[redi_lenght] = 0;
+				final_str[i].files[files_i].name
+					= ft_strtrim(final_str[i].files[files_i].name, "\'\"");
 				files_i++;
-				final_str[index].files_count++;
+				final_str[i].files_count++;
 			}
-			if (str[i][j] == '\'')
-			{
-				j++;
-				while (str[i][j] && str[i][j] != '\'')
-					j++;
-			}
-			else if (str[i][j] == '\"')
-			{
-				j++;
-				while (str[i][j] && str[i][j] != '\"')
-					j++;
-			}
+			skip_quotes(str, i, &j);
 			if (str[i][j] && (ft_strrchr(delimiter, str[i][j])
 				|| str[i][j + 1] == '\0'))
 			{
@@ -173,11 +101,11 @@ t_cmd	*space_delimiter_func(char **str, char *delimiter, int num_strct)
 					dif = j - k + 1;
 				if (y > 0)
 				{
-					final_str[index].n++;
-					final_str[index].args = realloc(final_str[index].args,
-							sizeof(char *) * (final_str[index].n));
+					final_str[i].n++;
+					final_str[i].args = realloc(final_str[i].args,
+							sizeof(char *) * (final_str[i].n));
 				}
-				final_str[index].args[y] = (char *)malloc(dif + 1);
+				final_str[i].args[y] = (char *)malloc(dif + 1);
 				while (x < dif)
 				{
 					if (k != 0 && str[i][k] && str[i][k] == '\'')
@@ -186,15 +114,15 @@ t_cmd	*space_delimiter_func(char **str, char *delimiter, int num_strct)
 						k++;
 					}
 					else
-						final_str[index].args[y][x++] = str[i][k++];
+						final_str[i].args[y][x++] = str[i][k++];
 				}
-				final_str[index].args[y][x] = '\0';
-				if (!inside_single_quotes(final_str[index].args[y]))
-					final_str[index].args[y]
-						= expand(ft_strtrim(final_str[index].args[y], "\'\""));
+				final_str[i].args[y][x] = '\0';
+				if (!inside_single_quotes(final_str[i].args[y]))
+					final_str[i].args[y]
+						= expand(ft_strtrim(final_str[i].args[y], "\'\""));
 				else
-					final_str[index].args[y]
-						= ft_strtrim(final_str[index].args[y], "\'\"");
+					final_str[i].args[y]
+						= ft_strtrim(final_str[i].args[y], "\'\"");
 				k = j + 1;
 				x = 0;
 				y++;
@@ -206,7 +134,6 @@ t_cmd	*space_delimiter_func(char **str, char *delimiter, int num_strct)
 			write(2, "syntax error\n", 14);
 			exit(EXIT_FAILURE);
 		}
-		index++;
 		i++;
 	}
 	return (final_str);

@@ -46,9 +46,13 @@ int			ft_strcmp(char *s1, char *s2);
 void		ft_putstr(char *s);
 int			calcul_delimiter(char *str, char *delimiter);
 char		**split_delimiter_func(char *str, char delimiter, char **pipe_split, int *num_tab);
-t_cmd	*space_delimiter_func(char **str, char *delimiter, int num_strct);
+t_cmd		*space_delimiter_func(char **str, char *delimiter, int num_strct);
 int			multiple_red(char *str);
 int			open_quotes(char *str);
 t_string    expand(t_string str);
 int			search_for_direction(char *str);
+void    	redirections(int i, int *j, char **str, t_cmd *final_str, int files_i);
+void    	quoted(char **str, int i, int *j, t_cmd *final_str, int files_i, int *redi_lenght);
+void		is_quoted_assign(char **str, int i, int *j, t_cmd *final_str, int *redi_lenght, int files_i);
+void		skip_quotes(char **str, int i, int *j);
 #endif
