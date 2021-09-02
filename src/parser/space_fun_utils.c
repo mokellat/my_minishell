@@ -6,7 +6,7 @@
 /*   By: mokellat <mokellat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 15:20:37 by mokellat          #+#    #+#             */
-/*   Updated: 2021/09/01 17:24:06 by mokellat         ###   ########.fr       */
+/*   Updated: 2021/09/01 18:14:17 by mokellat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,28 @@ void	skip_quotes(char **str, int i, int *j)
 		while (str[i][*j] && str[i][*j] != '\"')
 			(*j)++;
 	}
+}
+
+void	args_and_expand(char **str, int *x, int *dif, int *k, int i, int *y, int j,t_cmd *final_str)
+{
+	while (*x < *dif)
+	{
+		if (k != 0 && str[i][*k] && str[i][*k] == '\'')
+		{
+			(*dif)--;
+			(*k)++;
+		}
+		else
+			final_str[i].args[*y][(*x)++] = str[i][(*k)++];
+	}
+	final_str[i].args[*y][*x] = '\0';
+	if (!inside_single_quotes(final_str[i].args[*y]))
+		final_str[i].args[*y]
+			= expand(ft_strtrim(final_str[i].args[*y], "\'\""));
+	else
+		final_str[i].args[*y]
+			= ft_strtrim(final_str[i].args[*y], "\'\"");
+	*k = j + 1;
+	*x = 0;
+	(*y)++;
 }

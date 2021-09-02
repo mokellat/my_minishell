@@ -55,4 +55,7 @@ void    	redirections(int i, int *j, char **str, t_cmd *final_str, int files_i);
 void    	quoted(char **str, int i, int *j, t_cmd *final_str, int files_i, int *redi_lenght);
 void		is_quoted_assign(char **str, int i, int *j, t_cmd *final_str, int *redi_lenght, int files_i);
 void		skip_quotes(char **str, int i, int *j);
+void		args_and_expand(char **str, int *x, int *dif, int *k, int i, int *y, int j,t_cmd *final_str);
+char		inside_single_quotes(char *str);
+void    	before_delimiter(char **str, int *j, t_cmd *final_str, int i, int *files_i, int *redi_lenght);
 #endif

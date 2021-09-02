@@ -20,7 +20,7 @@ VECTOR			= new_vector.c     vector_free.c       vector_resize.c\
 ROOT			=  errors.c  init.c  loop.c  minishell.c  n_pipes.c \
 				   redirections.c  signals.c
 
-PARSER          = pipe_fun.c redirections_errors.c space_fun.c space_fun_utils.c
+PARSER          = pipe_fun.c redirections_errors.c space_fun.c space_fun_utils.c space_fun_utils__.c
 
 SRC				=	$(ROOT:%.c=./src/%.c)\
 					$(PARSER:%.c=./src/parser/%.c)\
