@@ -6,7 +6,7 @@
 /*   By: mokellat <mokellat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 16:50:19 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/03 18:43:40 by mokellat         ###   ########.fr       */
+/*   Updated: 2021/09/03 19:42:53 by mokellat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(int ac, char **argv, char **env_vars)
 	// mystr = "echo \"$s\"Make\'$s\'";
 	// mystr = "unset \"'\" test";
 	// mystr = " ls >";
-	mystr = " 'echo' ali >> 'name name name' 'okay ca marche' | \'$ça\' << '\"name' | 'ali is the best' | cat <1>"; //fix this bro
+	mystr = " 'echo' ali >> 'name name name' 'okay ca marche' | \'$ça\' << '\"name' | 'ali is the best' | cat <\"1\" >'1'"; //fix this bro
 	if(!open_quotes(mystr))
 	{
 		write(2, "syntax error\n", 14);

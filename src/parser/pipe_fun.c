@@ -40,61 +40,64 @@ int	calcul_delimiter(char *str, char *delimiter)
 	return (index);
 }
 
-void	delimiter_found(char *str, char **pipe_split, int i,
-char delimiter, int *index, int *j)
+void	delimiter_found(char *str, char **pipe_split,
+char delimiter, t_pipe_vars *p_vars)
 {
 	int	dif;
 	int	k;
 
-	if (i == (int)(str_len(str)) - 1 && str[i] == delimiter)
+	if (p_vars->i == (int)(str_len(str)) - 1 && str[p_vars->i] == delimiter)
 	{
 		write(2, "syntax error\n", 14);
 		exit(EXIT_FAILURE);
 	}
-	dif = i - *j;
-	if (str[i + 1] == '\0')
-		dif = i - *j + 1;
+	dif = p_vars->i - p_vars->j;
+	if (str[p_vars->i + 1] == '\0')
+		dif = p_vars->i - p_vars->j + 1;
 	k = 0;
-	pipe_split[*index] = (char *)malloc(dif + 1);
+	pipe_split[p_vars->index] = (char *)malloc(dif + 1);
 	while (k < dif)
-		pipe_split[*index][k++] = str[(*j)++];
-	pipe_split[*index][k] = '\0';
-	(*index)++;
+		pipe_split[p_vars->index][k++] = str[p_vars->j++];
+	pipe_split[p_vars->index][k] = '\0';
+	p_vars->index++;
+}
+
+void	quotes_work(char *str, t_pipe_vars	*p_vars)
+{
+	if (str[p_vars->i] == '\'')
+	{
+		p_vars->i++;
+		while (str[p_vars->i] && str[p_vars->i] != '\'')
+			p_vars->i++;
+	}
+	else if (str[p_vars->i] == '\"')
+	{
+		p_vars->i++;
+		while (str[p_vars->i] && str[p_vars->i] != '\"')
+			p_vars->i++;
+	}
 }
 
 char	**split_delimiter_func(char *str, char delimiter, char **pipe_split,
 int *num_tab)
 {
-	int	i;
-	int	index;
-	int	j;
+	t_pipe_vars	p_vars;
 
-	i = 0;
-	index = 0;
-	j = 0;
+	p_vars.i = 0;
+	p_vars.index = 0;
+	p_vars.j = 0;
 	*num_tab = calcul_delimiter(str, "|");
 	pipe_split = malloc(sizeof(char *) * (*num_tab + 1));
-	while (str[i])
+	while (str[p_vars.i])
 	{
-		if (str[i] == '\'')
+		quotes_work(str, &p_vars);
+		if (str[p_vars.i] == delimiter || str[p_vars.i + 1] == '\0')
 		{
-			i++;
-			while (str[i] && str[i] != '\'')
-				i++;
+			delimiter_found(str, pipe_split, delimiter, &p_vars);
+			p_vars.j = p_vars.i + 1;
 		}
-		else if (str[i] == '\"')
-		{
-			i++;
-			while (str[i] && str[i] != '\"')
-				i++;
-		}
-		if (str[i] == delimiter || str[i + 1] == '\0')
-		{
-			delimiter_found(str, pipe_split, i, delimiter, &index, &j);
-			j = i + 1;
-		}
-		i++;
+		p_vars.i++;
 	}
-	pipe_split[index] = 0;
+	pipe_split[p_vars.index] = 0;
 	return (pipe_split);
 }

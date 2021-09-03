@@ -39,48 +39,49 @@ void	init_program(t_pars_vars *pars_vars, char **str)
 
 t_cmd	*space_delimiter_func(char **str, char *delimiter, int num_strct)
 {
-	t_pars_vars	pars_vars;
+	t_pars_vars	vars;
 
-	pars_vars.i = 0;
-	pars_vars.x = 0; 
-	pars_vars.final_str = malloc(sizeof(t_cmd) * num_strct);
-	while (str[pars_vars.i])
+	vars.i = 0;
+	vars.x = 0;
+	vars.final_str = malloc(sizeof(t_cmd) * num_strct);
+	while (str[vars.i])
 	{
-		init_program(&pars_vars, str);
-		while (pars_vars.j < (int)str_len(str[pars_vars.i]))
+		init_program(&vars, str);
+		while (vars.j < (int)str_len(str[vars.i]))
 		{
-			before_delimiter(&pars_vars, str);
-			if (str[pars_vars.i][pars_vars.j] && (ft_strrchr(delimiter, str[pars_vars.i][pars_vars.j])
-				|| str[pars_vars.i][pars_vars.j + 1] == '\0'))
+			before_delimiter(&vars, str);
+			if (str[vars.i][vars.j] && (ft_strrchr(delimiter,
+				str[vars.i][vars.j]) || str[vars.i][vars.j + 1] == '\0'))
 			{
-				if (pars_vars.k > 0 && (str[pars_vars.i][pars_vars.k - 1] == '>' || str[pars_vars.i][pars_vars.k - 1] == '<'))
+				if (vars.k > 0 && (str[vars.i][vars.k - 1] == '>'
+					|| str[vars.i][vars.k - 1] == '<'))
 				{
-					pars_vars.j++;
-					pars_vars.k = pars_vars.j;
+					vars.j++;
+					vars.k = vars.j;
 					continue ;
 				}
-				if (str[pars_vars.i][pars_vars.k] == ' ')
+				if (str[vars.i][vars.k] == ' ')
 				{
-					while (str[pars_vars.i][pars_vars.k] && str[pars_vars.i][pars_vars.k] == ' ')
-						pars_vars.k++;
-					pars_vars.j = pars_vars.k;
+					while (str[vars.i][vars.k] && str[vars.i][vars.k] == ' ')
+						vars.k++;
+					vars.j = vars.k;
 					continue ;
 				}
-				pars_vars.dif = pars_vars.j - pars_vars.k;
-				if ((str[pars_vars.i][pars_vars.k] == '>' || str[pars_vars.i][pars_vars.k] == '<'))
+				vars.dif = vars.j - vars.k;
+				if ((str[vars.i][vars.k] == '>' || str[vars.i][vars.k] == '<'))
 				{
-					pars_vars.j++;
-					pars_vars.k++;
+					vars.j++;
+					vars.k++;
 					continue ;
 				}
-				if (str[pars_vars.i][pars_vars.j + 1] == '\0')
-					pars_vars.dif = pars_vars.j - pars_vars.k + 1;
-				after_delimiter(&pars_vars, str);
+				if (str[vars.i][vars.j + 1] == '\0')
+					vars.dif = vars.j - vars.k + 1;
+				after_delimiter(&vars, str);
 			}
-			pars_vars.j++;
+			vars.j++;
 		}
-		check_redi_null(&pars_vars, str);
-		pars_vars.i++;
+		check_redi_null(&vars, str);
+		vars.i++;
 	}
-	return (pars_vars.final_str);
+	return (vars.final_str);
 }
