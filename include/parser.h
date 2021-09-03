@@ -42,6 +42,19 @@ typedef struct s_pipeline
 	int		n;
 }	t_cmd;
 
+typedef struct s_pars_vars
+{
+	int		i;
+	int		j;
+	int		dif;
+	int		k;
+	int		x;
+	int		y;
+	t_cmd	*final_str;
+	int		redi_lenght;
+	int		files_i;
+}	t_pars_vars;
+
 int			ft_strcmp(char *s1, char *s2);
 void		ft_putstr(char *s);
 int			calcul_delimiter(char *str, char *delimiter);
@@ -51,13 +64,13 @@ int			multiple_red(char *str);
 int			open_quotes(char *str);
 t_string    expand(t_string str);
 int			search_for_direction(char *str);
-void    	redirections(int i, int *j, char **str, t_cmd *final_str, int files_i);
-void    	quoted(char **str, int i, int *j, t_cmd *final_str, int files_i, int *redi_lenght);
-void		is_quoted_assign(char **str, int i, int *j, t_cmd *final_str, int *redi_lenght, int files_i);
-void		skip_quotes(char **str, int i, int *j);
-void		args_and_expand(char **str, int *x, int *dif, int *k, int i, int *y, int j,t_cmd *final_str);
+void    	redirections(t_pars_vars *pars_vars, char **str);
+void    	quoted(t_pars_vars pars_vars, char **str);
+void		is_quoted_assign(t_pars_vars pars_vars, char **str);
+void		skip_quotes(t_pars_vars pars_vars, char **str);
+void		args_and_expand(t_pars_vars pars_vars, char **str);
 char		inside_single_quotes(char *str);
-void    	before_delimiter(char **str, int *j, t_cmd *final_str, int i, int *files_i, int *redi_lenght);
-void		after_delimiter(char **str, int *x, int *dif, int *k, int i, int *y, int j,t_cmd *final_str);
-void		check_redi_null(char **str, int i, int j);
+void    	before_delimiter(t_pars_vars pars_vars);
+void		after_delimiter(t_pars_vars pars_vars);
+void		check_redi_null(t_pars_vars pars_vars);
 #endif
