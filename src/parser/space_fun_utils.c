@@ -6,7 +6,7 @@
 /*   By: mokellat <mokellat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 15:20:37 by mokellat          #+#    #+#             */
-/*   Updated: 2021/09/03 17:05:10 by mokellat         ###   ########.fr       */
+/*   Updated: 2021/09/03 18:29:50 by mokellat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,40 +88,40 @@ void	is_quoted_assign(t_pars_vars *vars, char **str)
 
 void	skip_quotes(t_pars_vars *vars, char **str)
 {
-	if (str[i][*j] == '\'')
+	if (str[vars->i][vars->j] == '\'')
 	{
-		(*j)++;
-		while (str[i][*j] && str[i][*j] != '\'')
-			(*j)++;
+		vars->j++;
+		while (str[vars->i][vars->j] && str[vars->i][vars->j] != '\'')
+			vars->j++;
 	}
-	else if (str[i][*j] == '\"')
+	else if (str[vars->i][vars->j] == '\"')
 	{
-		(*j)++;
-		while (str[i][*j] && str[i][*j] != '\"')
-			(*j)++;
+		vars->j++;
+		while (str[vars->i][vars->j] && str[vars->i][vars->j] != '\"')
+			vars->j++;
 	}
 }
 
 void	args_and_expand(t_pars_vars *vars, char **str)
 {
-	while (*x < *dif)
+	while (vars->x < vars->dif)
 	{
-		if (k != 0 && str[i][*k] && str[i][*k] == '\'')
+		if (vars->k != 0 && str[vars->i][vars->k] && str[vars->i][vars->k] == '\'')
 		{
-			(*dif)--;
-			(*k)++;
+			(vars->dif)--;
+			(vars->k)++;
 		}
 		else
-			final_str[i].args[*y][(*x)++] = str[i][(*k)++];
+			vars->final_str[vars->i].args[vars->y][(vars->x)++] = str[vars->i][(vars->k)++];
 	}
-	final_str[i].args[*y][*x] = '\0';
-	if (!inside_single_quotes(final_str[i].args[*y]))
-		final_str[i].args[*y]
-			= expand(ft_strtrim(final_str[i].args[*y], "\'\""));
+	vars->final_str[vars->i].args[vars->y][vars->x] = '\0';
+	if (!inside_single_quotes(vars->final_str[vars->i].args[vars->y]))
+		vars->final_str[vars->i].args[vars->y]
+			= expand(ft_strtrim(vars->final_str[vars->i].args[vars->y], "\'\""));
 	else
-		final_str[i].args[*y]
-			= ft_strtrim(final_str[i].args[*y], "\'\"");
-	*k = j + 1;
-	*x = 0;
-	(*y)++;
+		vars->final_str[vars->i].args[vars->y]
+			= ft_strtrim(vars->final_str[vars->i].args[vars->y], "\'\"");
+	vars->k = vars->j + 1;
+	vars->x = 0;
+	(vars->y)++;
 }

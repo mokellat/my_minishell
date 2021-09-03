@@ -49,7 +49,7 @@ t_cmd	*space_delimiter_func(char **str, char *delimiter, int num_strct)
 		init_program(&pars_vars, str);
 		while (pars_vars.j < (int)str_len(str[pars_vars.i]))
 		{
-			before_delimiter(pars_vars);
+			before_delimiter(&pars_vars, str);
 			if (str[pars_vars.i][pars_vars.j] && (ft_strrchr(delimiter, str[pars_vars.i][pars_vars.j])
 				|| str[pars_vars.i][pars_vars.j + 1] == '\0'))
 			{
@@ -75,11 +75,11 @@ t_cmd	*space_delimiter_func(char **str, char *delimiter, int num_strct)
 				}
 				if (str[pars_vars.i][pars_vars.j + 1] == '\0')
 					pars_vars.dif = pars_vars.j - pars_vars.k + 1;
-				after_delimiter(pars_vars);
+				after_delimiter(&pars_vars, str);
 			}
 			pars_vars.j++;
 		}
-		check_redi_null(pars_vars);
+		check_redi_null(&pars_vars, str);
 		pars_vars.i++;
 	}
 	return (pars_vars.final_str);

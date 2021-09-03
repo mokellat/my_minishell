@@ -6,52 +6,52 @@
 /*   By: mokellat <mokellat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 13:05:56 by mokellat          #+#    #+#             */
-/*   Updated: 2021/09/03 15:38:13 by mokellat         ###   ########.fr       */
+/*   Updated: 2021/09/03 18:40:42 by mokellat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	before_delimiter(char **str, int *j, t_cmd *final_str, int i, int *files_i, int *redi_lenght)
+void	before_delimiter(t_pars_vars *vars ,char **str)
 {
-	if (*j > 0 && (str[i][*j - 1] == '>' || str[i][*j - 1] == '<'))
+	if (vars->j > 0 && (str[vars->i][vars->j - 1] == '>' || str[vars->i][vars->j - 1] == '<'))
 	{
-		(*j)--;
-		redirections(i, j, str, final_str, *files_i);
-		quoted(str, i, j, final_str, *files_i, redi_lenght);
-		final_str[i].files[*files_i].name
-			= malloc(*redi_lenght - *j + 2);
-		*redi_lenght = 0;
-		is_quoted_assign(str, i, j, final_str, redi_lenght, *files_i);
-		if (!ft_strcmp(final_str[i].files[*files_i].name, "\0"))
+		vars->j--;
+		redirections(vars, str);
+		quoted(vars, str);
+		vars->final_str[vars->i].files[vars->files_i].name
+			= malloc(vars->redi_lenght - vars->j + 2);
+		vars->redi_lenght = 0;
+		is_quoted_assign(vars, str);
+		if (!ft_strcmp(vars->final_str[vars->i].files[vars->files_i].name, "\0"))
 		{
 			write(2, "syntax error\n", 14);
 			exit(EXIT_FAILURE);
 		}
-		final_str[i].files[*files_i].name[*redi_lenght] = 0;
-		final_str[i].files[*files_i].name
-			= ft_strtrim(final_str[i].files[*files_i].name, "\'\"");
-		(*files_i)++;
-		final_str[i].files_count++;
+		vars->final_str[vars->i].files[vars->files_i].name[vars->redi_lenght] = 0;
+		vars->final_str[vars->i].files[vars->files_i].name
+			= ft_strtrim(vars->final_str[vars->i].files[vars->files_i].name, "\'\"");
+		vars->files_i++;
+		vars->final_str[vars->i].files_count++;
 	}
-	skip_quotes(str, i, j);
+	skip_quotes(vars, str);
 }
 
-void	after_delimiter(char **str, int *x, int *dif, int *k, int i, int *y, int j,t_cmd *final_str)
+void	after_delimiter(t_pars_vars *vars ,char **str)
 {
-	if (*y > 0)
+	if (vars->y > 0)
 	{
-		final_str[i].n++;
-		final_str[i].args = realloc(final_str[i].args,
-				sizeof(char *) * (final_str[i].n));
+		vars->final_str[vars->i].n++;
+		vars->final_str[vars->i].args = realloc(vars->final_str[vars->i].args,
+				sizeof(char *) * (vars->final_str[vars->i].n));
 	}
-	final_str[i].args[*y] = (char *)malloc(*dif + 1);
-	args_and_expand(str, x, dif, k, i, y, j, final_str);
+	vars->final_str[vars->i].args[vars->y] = (char *)malloc(vars->dif + 1);
+	args_and_expand(vars, str);
 }
 
-void	check_redi_null(char **str, int i, int j)
+void	check_redi_null(t_pars_vars *vars ,char **str)
 {
-	if (j > 0 && (str[i][j - 1] == '>' || str[i][j - 1] == '<'))
+	if (vars->j > 0 && (str[vars->i][vars->j - 1] == '>' || str[vars->i][vars->j - 1] == '<'))
 	{
 		write(2, "syntax error\n", 14);
 		exit(EXIT_FAILURE);
