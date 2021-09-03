@@ -58,4 +58,6 @@ void		skip_quotes(char **str, int i, int *j);
 void		args_and_expand(char **str, int *x, int *dif, int *k, int i, int *y, int j,t_cmd *final_str);
 char		inside_single_quotes(char *str);
 void    	before_delimiter(char **str, int *j, t_cmd *final_str, int i, int *files_i, int *redi_lenght);
+void		after_delimiter(char **str, int *x, int *dif, int *k, int i, int *y, int j,t_cmd *final_str);
+void		check_redi_null(char **str, int i, int j);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mokellat <mokellat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 13:05:56 by mokellat          #+#    #+#             */
-/*   Updated: 2021/09/02 14:12:27 by mokellat         ###   ########.fr       */
+/*   Updated: 2021/09/03 15:38:13 by mokellat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,25 @@ void	before_delimiter(char **str, int *j, t_cmd *final_str, int i, int *files_i,
 		final_str[i].files_count++;
 	}
 	skip_quotes(str, i, j);
+}
+
+void	after_delimiter(char **str, int *x, int *dif, int *k, int i, int *y, int j,t_cmd *final_str)
+{
+	if (*y > 0)
+	{
+		final_str[i].n++;
+		final_str[i].args = realloc(final_str[i].args,
+				sizeof(char *) * (final_str[i].n));
+	}
+	final_str[i].args[*y] = (char *)malloc(*dif + 1);
+	args_and_expand(str, x, dif, k, i, y, j, final_str);
+}
+
+void	check_redi_null(char **str, int i, int j)
+{
+	if (j > 0 && (str[i][j - 1] == '>' || str[i][j - 1] == '<'))
+	{
+		write(2, "syntax error\n", 14);
+		exit(EXIT_FAILURE);
+	}
 }

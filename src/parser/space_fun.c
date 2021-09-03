@@ -22,6 +22,19 @@ char	inside_single_quotes(char *str)
 	return (0);
 }
 
+void	init_program(int i ,int *j, int *k, int *y, int *files_i, t_cmd *final_str, char **str)
+{
+	*j = 0;
+	*k = 0;
+	*y = 0;
+	*files_i = 0;
+	final_str[i].n = 1;
+	final_str[i].args = malloc(sizeof(char *) * (final_str[i].n));
+	final_str[i].files = malloc(sizeof(t_file) * 100);
+	final_str[i].files_count = 0;
+	str[i] = ft_strtrim(str[i], " ");
+}
+
 t_cmd	*space_delimiter_func(char **str, char *delimiter, int num_strct)
 {
 	int		i;
@@ -35,22 +48,11 @@ t_cmd	*space_delimiter_func(char **str, char *delimiter, int num_strct)
 	int		files_i;
 
 	i = 0;
-	j = 0;
-	k = 0;
-	x = 0;
-	y = 0;
+	x = 0; 
 	final_str = malloc(sizeof(t_cmd) * num_strct);
 	while (str[i])
 	{
-		j = 0;
-		k = 0;
-		y = 0;
-		files_i = 0;
-		final_str[i].n = 1;
-		final_str[i].args = malloc(sizeof(char *) * (final_str[i].n));
-		final_str[i].files = malloc(sizeof(t_file) * 100);
-		final_str[i].files_count = 0;
-		str[i] = ft_strtrim(str[i], " ");
+		init_program(i ,&j, &k, &y, &files_i, final_str, str);
 		while (j < (int)str_len(str[i]))
 		{
 			before_delimiter(str, &j, final_str, i, &files_i, &redi_lenght);
@@ -79,22 +81,11 @@ t_cmd	*space_delimiter_func(char **str, char *delimiter, int num_strct)
 				}
 				if (str[i][j + 1] == '\0')
 					dif = j - k + 1;
-				if (y > 0)
-				{
-					final_str[i].n++;
-					final_str[i].args = realloc(final_str[i].args,
-							sizeof(char *) * (final_str[i].n));
-				}
-				final_str[i].args[y] = (char *)malloc(dif + 1);
-				args_and_expand(str, &x, &dif, &k, i, &y, j, final_str);
+				after_delimiter(str, &x, &dif, &k, i, &y, j, final_str);
 			}
 			j++;
 		}
-		if (j > 0 && (str[i][j - 1] == '>' || str[i][j - 1] == '<'))
-		{
-			write(2, "syntax error\n", 14);
-			exit(EXIT_FAILURE);
-		}
+		check_redi_null(str, i, j);
 		i++;
 	}
 	return (final_str);
