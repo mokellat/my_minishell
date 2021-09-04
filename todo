@@ -11,5 +11,7 @@ PARSING:
         - ">" : done
         - "<" : done
     - echo hey << "1" [must differ ' from "] : checked and done
+
+    " 'echo'ali >>'name name name''okay ca marche' : false
  
 EXEC:

@@ -53,6 +53,7 @@ typedef struct s_pars_vars
 	t_cmd	*final_str;
 	int		redi_lenght;
 	int		files_i;
+	int		check;
 }	t_pars_vars;
 
 typedef struct s_pipe_vars_
