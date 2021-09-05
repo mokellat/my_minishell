@@ -6,7 +6,7 @@
 /*   By: mokellat <mokellat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 15:20:37 by mokellat          #+#    #+#             */
-/*   Updated: 2021/09/03 19:07:33 by mokellat         ###   ########.fr       */
+/*   Updated: 2021/09/05 09:04:15 by mokellat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,8 @@ void	args_and_expand(t_pars_vars *vars, char **str)
 	while (vars->x < vars->dif)
 	{
 		if (vars->k != 0 && str[vars->i][vars->k] &&
-			str[vars->i][vars->k] == '\'')
+		(str[vars->i][vars->k] == '\'' || str[vars->i][vars->k] == '"')
+		&& str[vars->i][vars->k + 1] != '$')
 		{
 			(vars->dif)--;
 			(vars->k)++;

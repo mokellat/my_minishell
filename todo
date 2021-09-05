@@ -13,5 +13,7 @@ PARSING:
     - echo hey << "1" [must differ ' from "] : checked and done
 
     " 'echo'ali >>'name name name''okay ca marche' : false
+    "\"l\"\"s\"                 >>           'med ali'" : done
+    "echo '$HOME'" : done
  
 EXEC:
