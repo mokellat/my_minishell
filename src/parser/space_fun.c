@@ -83,6 +83,7 @@ t_cmd	*space_delimiter_func(char **str, char *delimiter, int num_strct)
 		init_program(&vars, str);
 		while (vars.j < (int)str_len(str[vars.i]))
 		{
+			vars.check = 0;
 			before_delimiter(&vars, str);
 			if (str[vars.i][vars.j] && (ft_strrchr(delimiter,
 				str[vars.i][vars.j]) || str[vars.i][vars.j + 1] == '\0'))
