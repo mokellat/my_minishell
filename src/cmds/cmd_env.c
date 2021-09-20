@@ -6,17 +6,17 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 03:32:12 by hamza             #+#    #+#             */
-/*   Updated: 2021/07/15 19:28:33 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/20 18:46:55 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_res	cmd_env(t_shell *shell, t_string *args)
+t_res	cmd_env(t_shell *shell, T_STRING *args, int n)
 {
 	int			i;
 	t_res		res;
-	t_string	output;
+	T_STRING	output;
 	t_env		env;
 
 	(void)args;

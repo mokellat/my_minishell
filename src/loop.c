@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 17:14:43 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/08/12 22:51:28 by hamza            ###   ########.fr       */
+/*   Updated: 2021/09/20 18:49:35 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_string	*env_to_arr(t_env *env)
+T_STRING	*env_to_arr(t_env *env)
 {
-	t_string	*env_arr;
+	T_STRING	*env_arr;
 	int			i;
-	t_string	key;
-	t_string	value;
+	T_STRING	key;
+	T_STRING	value;
 
 	i = -1;
-	env_arr = sf_malloc(sizeof(t_string) * (env->keys.size + 1), ADD);
+	env_arr = sf_malloc(sizeof(T_STRING) * (env->keys.size + 1), ADD);
 	while (++i < env->keys.size)
 	{
 		key = vector_get(&env->keys, i);
@@ -32,12 +32,12 @@ t_string	*env_to_arr(t_env *env)
 	return (env_arr);
 }
 
-t_string	get_exec_path(t_shell *shell,
-			t_string *args, struct stat stats, int *status)
+T_STRING	get_exec_path(t_shell *shell,
+			T_STRING *args, struct stat stats, int *status)
 {
-	t_string	*paths;
-	t_string	path_var;
-	t_string	path;
+	T_STRING	*paths;
+	T_STRING	path_var;
+	T_STRING	path;
 	int			i;
 
 	path_var = get_env(shell, "PATH");
@@ -54,12 +54,12 @@ t_string	get_exec_path(t_shell *shell,
 	return (path);
 }
 
-int	shell_launch(t_shell *shell, t_string *args)
+int	shell_launch(t_shell *shell, T_STRING *args)
 {
 	int			status;
 	struct stat	stats;
 	int			exit_code;
-	t_string	path;
+	T_STRING	path;
 
 	status = stat(args[0], &stats);
 	path = get_exec_path(shell, args, stats, &status);
@@ -78,17 +78,19 @@ int	shell_launch(t_shell *shell, t_string *args)
 	return (exit_code);
 }
 
-t_res	execute_builtin_cmd(t_string *args, t_shell *shell, int *is_builtin)
+t_res	execute_builtin_cmd(t_cmd cmd, t_shell *shell, int *is_builtin)
 {
-	int		i;
-	t_res	res;
+	int			i;
+	t_res		res;
+	T_STRING	*args;
 
+	args = cmd.args;
 	i = -1;
 	while (++i < CMDS_COUNT)
 	{
 		if (str_cmp(args[0], shell->cmds_str[i]) == TRUE)
 		{
-			res = ((*shell->cmds)(i))(shell, args);
+			res = ((*shell->cmds)(i))(shell, args, cmd.n);
 			*is_builtin = TRUE;
 			return (res);
 		}
@@ -100,28 +102,27 @@ t_res	execute_builtin_cmd(t_string *args, t_shell *shell, int *is_builtin)
 
 void	shell_loop(t_shell *shell)
 {
-	t_string	line;
+	T_STRING	line;
 	t_cmd		*cmds;
 	t_res		result;
 	int			ret;
 
 	result.status = TRUE;
-	shell->counter = TRUE;
 	while (result.status)
 	{
 		line = readline("minishell$ ");
-		if (shell->ctrl_c_catched == true && handle_ctrl_c(shell))
-			continue ;
-		else if (line && !*line)
+		if (line && !*line)
 			continue ;
 		else if (!line)
 			break ;
 		add_history(line);
 		ret = parse(line, &cmds);
 		free(line);
-		if (ret == -1 && (shell->exit_code = 2))
+		if (ret == -1)
+		{
+			shell->exit_code = 2;
 			continue ;
+		}
 		result = fork_pipes(ret, cmds, shell);
-		shell->counter = TRUE;
 	}
 }

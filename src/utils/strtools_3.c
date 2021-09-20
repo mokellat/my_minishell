@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:27:27 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/07/14 15:45:49 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/20 18:46:55 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[x] - s2[x]);
 }
 
-void	swap(t_string *xp, t_string *yp)
+void	swap(T_STRING *xp, T_STRING *yp)
 {
-	t_string	temp;
+	T_STRING	temp;
 
 	temp = *xp;
 	*xp = *yp;

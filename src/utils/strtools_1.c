@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 16:34:41 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/07/07 20:25:17 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/20 18:46:55 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_isalpha(int c)
 	return (0);
 }
 
-int	tablen(t_string *taab)
+int	tablen(T_STRING *taab)
 {
 	int	i;
 

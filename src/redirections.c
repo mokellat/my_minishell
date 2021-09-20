@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 05:50:16 by hamza             #+#    #+#             */
-/*   Updated: 2021/08/12 23:22:33 by hamza            ###   ########.fr       */
+/*   Updated: 2021/09/20 18:58:57 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,52 +47,12 @@ int	red_in(t_redir *redir, t_file file)
 	return (0);
 }
 
-t_string	expand(t_string s)
-{
-	int			i;
-	t_string	buff;
-	t_string	expanded_str;
-	t_string	val;
-	int			len;
-
-	len = str_len(s);
-	i = -1;
-	expanded_str = "";
-	while (++i < len)
-	{
-		buff = "";
-		if (s[i] == '$' && ++i)
-		{
-			if (!s[i])
-			{
-				expanded_str = join(expanded_str, "$");
-				break ;
-			}
-			if (is_digit(s[i]) && ++i)
-				continue ;
-			if (s[i] == '?' && ++i)
-			{
-				expanded_str = join(expanded_str,
-					ft_itoa(shell_ref(NULL)->exit_code));
-				continue ;
-			}
-			while (s[i] && (ft_isalpha(s[i]) || s[i] == '_' || is_digit(s[i])))
-				buff = join_c(buff, s[i++]);
-			val = get_env(shell_ref(NULL), buff);
-			val && (expanded_str = join(expanded_str, val));
-		}
-		else
-			expanded_str = join_c(expanded_str, s[i]); // todo :norme bruh | check
-	}
-	return (expanded_str);
-}
-
 // #define HERE fprintf(stderr, "here: %s:%d\n", __FILE__, __LINE__)
 int	red_in_source(t_file *f)
 {
-	t_string	source;
-	t_string	line;
-	t_string	buff;
+	T_STRING	source;
+	T_STRING	line;
+	T_STRING	buff;
 	int			fd[2];
 
 	(pipe(fd) || 1) && (source = f->name);
@@ -134,7 +94,7 @@ t_redir	check_for_redirections(t_cmd *cmd)
 	while (++i < cmd->files_count)
 	{
 		if ((files[i].type == RED_IN
-			|| files[i].type == RED_IN_SOURCE))
+				|| files[i].type == RED_IN_SOURCE))
 			redir.err = red_in(&redir, files[i]);
 		else if (files[i].type == RED_OUT)
 			redir.err = red_out(&redir, files[i]);

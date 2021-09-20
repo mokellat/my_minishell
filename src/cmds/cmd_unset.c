@@ -6,15 +6,15 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 17:16:12 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/07/15 19:28:33 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/20 18:46:55 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_string	validate_identifier(t_string ident, t_string cmd)
+T_STRING	validate_identifier(T_STRING ident, T_STRING cmd)
 {
-	t_string	msg;
+	T_STRING	msg;
 
 	msg = "";
 	if (!ft_isalpha(ident[0]))
@@ -32,17 +32,17 @@ void	delete_env_var(t_shell *shell, int index)
 	vector_delete(&shell->env.values, index);
 }
 
-t_res	cmd_unset(t_shell *shell, t_string *args)
+t_res	cmd_unset(t_shell *shell, T_STRING *args, int n)
 {
 	t_res		res;
 	int			i;
-	t_string	key;
+	T_STRING	key;
 	int			index;
-	t_string	error;
+	T_STRING	error;
 
 	i = 0;
 	res.output = "";
-	while (args[++i])
+	while (++i < n)
 	{
 		key = args[i];
 		error = validate_identifier(key, "unset");

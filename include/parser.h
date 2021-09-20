@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mokellat <mokellat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/02 18:56:58 by mokellat          #+#    #+#             */
-/*   Updated: 2021/07/29 16:12:34 by mokellat         ###   ########.fr       */
+/*   Created: 2021/09/20 18:30:31 by hmellahi          #+#    #+#             */
+/*   Updated: 2021/09/20 18:30:31 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# define t_string char*
+# define T_STRING char*
 
 # include <unistd.h>
 # include <stdio.h>
@@ -71,7 +71,7 @@ char		**split_delimiter_func(char *str, char delimiter,
 t_cmd		*space_delimiter_func(char **str, char *delimiter, int num_strct);
 int			multiple_red(char *str);
 int			open_quotes(char *str);
-t_string	expand(t_string str);
+T_STRING	expand(T_STRING str);
 int			search_for_direction(char *str);
 void		redirections(t_pars_vars *pars_vars, char **str);
 void		quoted(t_pars_vars *pars_vars, char **str);

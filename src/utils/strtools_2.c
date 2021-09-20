@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 12:09:18 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/07/15 19:28:33 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/20 18:46:55 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ char	*sub_str(char *s, size_t start, size_t len)
 	return (s2);
 }
 
-t_string	cpy_from_to(t_string	ptr1,	t_string	ptr2)
+T_STRING	cpy_from_to(T_STRING	ptr1,	T_STRING	ptr2)
 {
-	t_string	str;
+	T_STRING	str;
 	int			i;
 	int			len;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   n_pipes.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 16:50:04 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/08/12 23:08:21 by hamza            ###   ########.fr       */
+/*   Updated: 2021/09/20 18:46:55 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	close_all_pipes(int **fd, int n)
 	}
 }
 
-void	exec_cmd(t_shell *shell, t_redir redir, t_string *args, t_res res)
+void	exec_cmd(t_shell *shell, t_redir redir, t_cmd cmd, t_res res)
 {
 	if (redir.in_file)
 		shell->in = redir.in_file;
@@ -41,12 +41,14 @@ void	exec_cmd(t_shell *shell, t_redir redir, t_string *args, t_res res)
 		close(shell->out);
 	}
 	close_all_pipes(shell->fd, shell->n - 1);
+	cmd.args = realloc(cmd.args, sizeof(T_STRING) * (cmd.n + 1));
+	cmd.args[cmd.n] = 0;
 	if (shell->n != 1)
-		res = execute_builtin_cmd(args, shell, &shell->is_builtin);
+		res = execute_builtin_cmd(cmd, shell, &shell->is_builtin);
 	if (shell->is_builtin == TRUE)
 		put_str(res.output);
 	else
-		shell->exit_code = shell_launch(shell, args);
+		shell->exit_code = shell_launch(shell, cmd.args);
 	exit(shell->exit_code);
 }
 
@@ -54,7 +56,7 @@ int	spawn_proc(t_cmd cmd, t_shell *shell)
 {
 	pid_t		pid;
 	t_res		res;
-	t_string	*args;
+	T_STRING	*args;
 	t_redir		redir;
 
 	redir = check_for_redirections(&cmd);
@@ -70,11 +72,11 @@ int	spawn_proc(t_cmd cmd, t_shell *shell)
 	}
 	shell->is_builtin = 0;
 	if (shell->n == 1)
-		res = execute_builtin_cmd(args, shell, &shell->is_builtin);
+		res = execute_builtin_cmd(cmd, shell, &shell->is_builtin);
 	shell->last && (shell->out = 1);
 	pid = fork();
 	if (pid == 0)
-		exec_cmd(shell, redir, args, res);
+		exec_cmd(shell, redir, cmd, res);
 	return (!shell->is_builtin || (shell->is_builtin && res.status));
 }
 
@@ -91,7 +93,7 @@ void	catch_child_proc_exit_status(t_shell *shell)
 	{
 		signal = WTERMSIG(wstatus);
 		if (signal == SIGQUIT)
-			put_str("Quit");
+			put_str("Quit: 3\n");
 		shell->exit_code = signal + 128;
 	}
 }
@@ -101,6 +103,7 @@ t_res	fork_pipes(int n, t_cmd *cmd, t_shell *shell)
 	int		i;
 	t_res	res;
 
+	shell->in_child = 1;
 	shell->fd = sf_malloc(sizeof(int *) * n, ADD);
 	i = -1;
 	while (++i < n)
@@ -120,5 +123,6 @@ t_res	fork_pipes(int n, t_cmd *cmd, t_shell *shell)
 	close_all_pipes(shell->fd, n - 1);
 	if (!shell->redir_has_error)
 		catch_child_proc_exit_status(shell);
+	shell->in_child = 0;
 	return (res);
 }

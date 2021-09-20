@@ -6,15 +6,15 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 17:14:37 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/07/15 19:27:35 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/20 18:46:55 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_string	get_env(t_shell *shell, t_string var_key)
+T_STRING	get_env(t_shell *shell, T_STRING var_key)
 {
-	t_string	value;
+	T_STRING	value;
 	int			index;
 
 	index = vector_find(&shell->env.keys, var_key);
@@ -24,12 +24,12 @@ t_string	get_env(t_shell *shell, t_string var_key)
 	return (value);
 }
 
-void	init_env(t_env *env, t_string *env_vars)
+void	init_env(t_env *env, T_STRING *env_vars)
 {
 	int			i;
-	t_string	key;
-	t_string	value;
-	t_string	ptr;
+	T_STRING	key;
+	T_STRING	value;
+	T_STRING	ptr;
 
 	new_vector(&env->keys);
 	new_vector(&env->values);
@@ -46,13 +46,13 @@ void	init_env(t_env *env, t_string *env_vars)
 	}
 }
 
-void	init_shell(t_shell *shell, t_string *env_vars)
+void	init_shell(t_shell *shell, T_STRING *env_vars)
 {
 	shell->cmds_str = init_cmds_str();
 	shell->cmds = &cmds;
 	shell->status_code = 0;
 	shell->in_heredoc = 0;
-	cmd_pwd(shell, NULL);
+	cmd_pwd(shell, NULL, 0);
 	init_env(&shell->env, env_vars);
 	shell->depth = 1;
 	init_signals();

@@ -11,7 +11,7 @@ UTILS			=	strtools_0.c strtools_4.c strtools_1.c strtools_2.c\
 CMDS			= cmd_pwd.c cmd_unset.c cmd_exit.c cmd_echo.c\
 				  cmd_env.c init_cmds.c	 cmd_cd.c cmd_export.c
 
-HELPERS			= operations.c
+HELPERS			= operations.c expand.c
 
 VECTOR			= new_vector.c     vector_free.c       vector_resize.c\
 				  vector_delete.c  vector_get.c        vector_set.c\
@@ -32,7 +32,7 @@ SRC				=	$(ROOT:%.c=./src/%.c)\
 
 OBJ				=	$(SRC:.c=.o)
 DBG_FLAGS		=  -g -fsanitize=address
-READLINE_FLAGS  = -L/usr/include -lreadline
+READLINE_FLAGS  = -L/usr/include -lreadline -L ~/.brew/opt/readline/lib  -I~/.brew/opt/readline/include
 
 all: $(NAME)
 

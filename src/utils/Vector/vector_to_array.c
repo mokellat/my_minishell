@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-t_string	*vector_to_array(t_vector *this)
+T_STRING	*vector_to_array(t_vector *this)
 {
 	return (this->items);
 }

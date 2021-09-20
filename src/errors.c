@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 02:08:53 by hamza             #+#    #+#             */
-/*   Updated: 2021/08/12 23:07:45 by hamza            ###   ########.fr       */
+/*   Updated: 2021/09/20 18:46:55 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_error	new_error(t_string msg, int status_code)
+t_error	new_error(T_STRING msg, int status_code)
 {
 	t_error		err;
 
@@ -38,9 +38,9 @@ t_error	get_err_msg(int index)
 	return (errors[index]);
 }
 
-int	print_err(t_string path, int error_index)
+int	print_err(T_STRING path, int error_index)
 {
-	t_string	error;
+	T_STRING	error;
 	t_error		error_msg;
 	int			status_code;
 

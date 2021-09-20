@@ -6,17 +6,17 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 16:37:47 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/07/10 14:17:51 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/20 18:46:55 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_string	*init_cmds_str(void)
+T_STRING	*init_cmds_str(void)
 {
-	t_string	*cmds_str;
+	T_STRING	*cmds_str;
 
-	cmds_str = sf_malloc(sizeof(t_string) * (CMDS_COUNT + 1), ADD);
+	cmds_str = sf_malloc(sizeof(T_STRING) * (CMDS_COUNT + 1), ADD);
 	cmds_str[0] = "exit";
 	cmds_str[1] = "pwd";
 	cmds_str[2] = "cd";
@@ -28,8 +28,8 @@ t_string	*init_cmds_str(void)
 	return (cmds_str);
 }
 
-t_res (*cmds(int i))(t_shell * shell, char **args){
-t_res (*funcs[8])(t_shell * shell, char **args);
+t_res (*cmds(int i))(t_shell * shell, char **args, int n){
+t_res (*funcs[8])(t_shell * shell, char **args, int n);
 funcs[0] = &cmd_exit;
 funcs[1] = &cmd_pwd;
 funcs[2] = &cmd_cd;

@@ -6,13 +6,13 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 17:31:44 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/07/15 19:28:33 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/20 18:46:55 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_string	*bubble_sort(t_string *arr, int n)
+T_STRING	*bubble_sort(T_STRING *arr, int n)
 {
 	int	i;
 	int	j;
@@ -40,7 +40,7 @@ t_env	env_cpy(t_env env)
 t_res	show_env_list_sorted(t_env old)
 {
 	int			i;
-	t_string	*arr;
+	T_STRING	*arr;
 	t_res		res;
 
 	i = -1;
@@ -57,10 +57,10 @@ t_res	show_env_list_sorted(t_env old)
 	return (res);
 }
 
-int	update_env_var(t_shell *shell, t_string key, t_string value, t_string arg)
+int	update_env_var(t_shell *shell, T_STRING key, T_STRING value, T_STRING arg)
 {
 	int			index;
-	t_string	error;
+	T_STRING	error;
 
 	error = validate_identifier(arg, "export");
 	if (*error != EMPTY)
@@ -79,20 +79,20 @@ int	update_env_var(t_shell *shell, t_string key, t_string value, t_string arg)
 	return (0);
 }
 
-t_res	cmd_export(t_shell *shell, t_string *args)
+t_res	cmd_export(t_shell *shell, T_STRING *args, int n)
 {
 	t_res		res;
 	int			i;
-	t_string	key;
-	t_string	value;
+	T_STRING	key;
+	T_STRING	value;
 
 	i = 0;
 	res.output = "";
 	res.status = TRUE;
 	shell->exit_code = 0;
-	if (tablen(args) == 1)
+	if (n == 1)
 		return (show_env_list_sorted(shell->env));
-	while (args[++i])
+	while (++i < n)
 	{
 		value = char_addr('=', args[i]);
 		if (value == NULL)

@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 15:28:53 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/07/14 15:41:26 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/20 18:46:55 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,21 +76,21 @@ t_res	exit_with_empty_res(t_shell *shell, int error)
 	return (res);
 }
 
-t_res	cmd_exit(t_shell *shell, t_string *args)
+t_res	cmd_exit(t_shell *shell, T_STRING *args, int n)
 {
 	t_res	res;
 
 	res.status = FALSE;
 	res.output = "";
-	if (tablen(args) >= 2 && !str_is_digit(args[1]))
+	if (n >= 2 && !str_is_digit(args[1]))
 		return (exit_with_empty_res(shell, NUM_ARG_REQ));
-	if (tablen(args) == 2)
+	if (n == 2)
 	{
 		shell->exit_code = spec_atoi(args[1]);
 		if (shell->exit_code == -1)
 			return (exit_with_empty_res(shell, NUM_ARG_REQ));
 	}
-	else if (tablen(args) > 2)
+	else if (n > 2)
 		return (exit_with_empty_res(shell, TOO_MANY_ARGS));
 	return (res);
 }

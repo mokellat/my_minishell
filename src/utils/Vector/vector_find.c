@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	vector_find(t_vector *this, t_string value)
+int	vector_find(t_vector *this, T_STRING value)
 {
 	int	i;
 

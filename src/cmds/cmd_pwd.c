@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 17:15:48 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/07/15 19:28:33 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/20 18:46:55 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strcpy(char *dst, const char *src)
 	return (dst);
 }
 
-t_res	cmd_pwd(t_shell *shell, t_string *args)
+t_res	cmd_pwd(t_shell *shell, T_STRING *args, int n)
 {
 	t_res	res;
 	char	cwd[1024];
