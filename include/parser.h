@@ -82,4 +82,6 @@ char		inside_single_quotes(char *str);
 void		before_delimiter(t_pars_vars *pars_vars, char **str);
 void		after_delimiter(t_pars_vars *pars_vars, char **str);
 void		check_redi_null(t_pars_vars *pars_vars, char **str);
+void		check_name_after(char **str, t_pars_vars *vars);
+void		assign_name_after(char **str, t_pars_vars *vars);
 #endif

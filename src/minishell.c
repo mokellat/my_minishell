@@ -6,7 +6,7 @@
 /*   By: mokellat <mokellat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 16:50:19 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/19 17:39:01 by mokellat         ###   ########.fr       */
+/*   Updated: 2021/09/20 14:59:44 by mokellat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int ac, char **argv, char **env_vars)
 	t_split_pipe	pipe_split;
 	t_cmd			*final_str;
 
-	// mystr = " 'echo'ali    >       'bro'         a hey | $a<<'dude' | 'l''s' | cat<  1";
+	// mystr = " 'echo'ali    >       'bro'         a hey | $HOME<<'dude' | 'l''s' | cat<  1";
 	// mystr = " 'echo'ali    >       bro         a hey ";
 	// mystr = "echo \"|\" |" ; // we should take it as syntax error
 	// mystr = "|" ; // syntax error
@@ -60,7 +60,7 @@ int	main(int ac, char **argv, char **env_vars)
 	// mystr = "echo \"$s\"Make\'$s\'";
 	// mystr = "unset \"'\" test";
 	// mystr = " ls >";
-	mystr = " 'echo' ali >> 'name name name'okay ca marche";
+	mystr = " 'echo' ali >> \"name name name\"okay ca marche";
 	// mystr = " 'echo'ali >> 'name name name'\"$HOME\"";
 	//| \'$ça\' << '\"name' | 'ali is the best' | cat <\"1\" >'1'"; //fix this bro
 	if(!open_quotes(mystr))

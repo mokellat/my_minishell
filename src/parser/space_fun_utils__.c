@@ -6,7 +6,7 @@
 /*   By: mokellat <mokellat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 13:05:56 by mokellat          #+#    #+#             */
-/*   Updated: 2021/09/03 19:04:18 by mokellat         ###   ########.fr       */
+/*   Updated: 2021/09/20 15:06:33 by mokellat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,63 @@ void	check_redi_null(t_pars_vars *vars, char **str)
 	{
 		write(2, "syntax error\n", 14);
 		exit(EXIT_FAILURE);
+	}
+}
+
+void	check_name_after(char **str, t_pars_vars *vars)
+{
+	if (str[vars->i][vars->redi_lenght] && (str[vars->i][vars->redi_lenght
+		+ 1] != '\0' || str[vars->i][vars->redi_lenght + 1] != ' '))
+	{
+		vars->redi_lenght++;
+		if (str[vars->i][vars->redi_lenght] == '\'')
+		{
+			vars->redi_lenght++;
+			while (str[vars->i][vars->redi_lenght] && str[vars->i]
+				[vars->redi_lenght] != '\'')
+				vars->redi_lenght++;
+		}
+		else if (str[vars->i][vars->redi_lenght] == '\"')
+		{
+			vars->redi_lenght++;
+			while (str[vars->i][vars->redi_lenght] &&
+				str[vars->i][vars->redi_lenght] != '\"')
+				vars->redi_lenght++;
+		}
+		else
+		{
+			while (str[vars->i][vars->redi_lenght] &&
+				str[vars->i][vars->redi_lenght] != ' ')
+				vars->redi_lenght++;
+		}
+	}
+}
+
+void	assign_name_after(char **str, t_pars_vars *vars)
+{
+	if (str[vars->i][vars->j] && (str[vars->i][vars->j + 1] != '\0'
+		|| str[vars->i][vars->j + 1] != ' '))
+	{
+		vars->j++;
+		if (str[vars->i][vars->j] == '\'')
+		{
+			vars->j++;
+			while (str[vars->i][vars->j] && str[vars->i][vars->j] != '\'')
+				vars->final_str[vars->i].files[vars->files_i]
+					.name[vars->redi_lenght++] = str[vars->i][vars->j++];
+		}
+		else if (str[vars->i][vars->j] == '\"')
+		{
+			vars->j++;
+			while (str[vars->i][vars->j] && str[vars->i][vars->j] != '\"')
+				vars->final_str[vars->i].files[vars->files_i]
+					.name[vars->redi_lenght++] = str[vars->i][vars->j++];
+		}
+		else
+		{
+			while (str[vars->i][vars->j] && str[vars->i][vars->j] != ' ')
+				vars->final_str[vars->i].files[vars->files_i]
+					.name[vars->redi_lenght++] = str[vars->i][vars->j++];
+		}
 	}
 }

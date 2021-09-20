@@ -6,7 +6,7 @@
 /*   By: mokellat <mokellat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 15:20:37 by mokellat          #+#    #+#             */
-/*   Updated: 2021/09/19 16:05:57 by mokellat         ###   ########.fr       */
+/*   Updated: 2021/09/20 14:59:58 by mokellat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,7 @@ void	quoted(t_pars_vars *vars, char **str)
 		while (str[vars->i][vars->redi_lenght] && str[vars->i]
 			[vars->redi_lenght] != '\'')
 			vars->redi_lenght++;
-		if(str[vars->i][vars->redi_lenght] && (str[vars->i][vars->redi_lenght + 1] != '\0'
-			|| str[vars->i][vars->redi_lenght + 1] != ' '))
-		{
-			vars->redi_lenght++;
-			if(str[vars->i][vars->redi_lenght] == '\'')
-			{
-				vars->redi_lenght++;
-				while(str[vars->i][vars->redi_lenght] && str[vars->i][vars->redi_lenght] != '\'')
-					vars->redi_lenght++;
-			}
-			else
-			{
-				//redi_lenght++;
-				while(str[vars->i][vars->redi_lenght] && str[vars->i][vars->redi_lenght] != ' ')
-					vars->redi_lenght++;
-			}
-		}
+		check_name_after(str, vars);
 	}
 	else
 	{
@@ -95,23 +79,7 @@ void	is_quoted_assign(t_pars_vars *vars, char **str)
 				vars->final_str[vars->i].files[vars->files_i]
 					.name[vars->redi_lenght++] = str[vars->i][vars->j++];
 		}
-		puts("sd");
-		if(str[vars->i][vars->j] && (str[vars->i][vars->j + 1] != '\0' || str[vars->i][vars->j + 1] != ' '))
-		{
-			vars->j++;
-			if(str[vars->i][vars->j] == '\'')
-			{
-				vars->j++;
-				while(str[vars->i][vars->j] && str[vars->i][vars->j] != '\'')
-					vars->final_str[vars->i].files[vars->files_i].name[vars->redi_lenght++] = str[vars->i][vars->j++];
-			}
-			else
-			{
-				while(str[vars->i][vars->j] && str[vars->i][vars->j] != ' ')
-					vars->final_str[vars->i].files[vars->files_i].name[vars->redi_lenght++] = str[vars->i][vars->j++];
-			}
-		}
-		// vars->j++;
+		assign_name_after(str, vars);
 	}
 	else
 	{
