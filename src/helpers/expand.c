@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 18:59:06 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/22 17:41:40 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/22 17:49:36 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	get_var_value(T_STRING s, T_STRING *expanded_str, int *i, T_STRING *buff)
 				ft_itoa(shell_ref(NULL)->exit_code));
 		return (2);
 	}
-	while (*i < (str_len(s)) && (ft_isalpha(s[*i]) || s[*i] == '_' || is_digit(s[*i])))
+	while (*i < (str_len(s))
+		&& (ft_isalpha(s[*i]) || s[*i] == '_' || is_digit(s[*i])))
 		*buff = join_c(*buff, s[(*i)++]);
 	val = get_env(shell_ref(NULL), *buff);
 	val && (*expanded_str = join(*expanded_str, val));
