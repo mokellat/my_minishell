@@ -37,7 +37,7 @@ READLINE_FLAGS  = -L/usr/include -lreadline -L ~/.brew/opt/readline/lib  -I~/.br
 all: $(NAME)
 
 $(NAME): $(SRC)
-	@$(CC) ${FLAGS} -I include $(READLINE_FLAGS)  $(SRC)  -lreadline  -o $(NAME) -fsanitize=address -g
+	@$(CC) ${FLAGS} -I include $(READLINE_FLAGS)  $(SRC)  -lreadline  -o $(NAME)
 	@rm -rf *.o
 
 san :

@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:27:27 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/20 18:46:55 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/22 17:08:26 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,21 @@ t_bool	is_digit(char c)
 	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
+}
+
+char	**ft_reallocate(char **arr, int i)
+{
+	char	**new_map;
+	int		j;
+
+	j = 0;
+	new_map = malloc((i + 1) * sizeof(T_STRING));
+	while (j < i)
+	{
+		new_map[j] = ft_strdup(arr[j]);
+		j++;
+	}
+	new_map[j] = NULL;
+	free(arr);
+	return (new_map);
 }

@@ -17,3 +17,4 @@ PARSING:
     "echo '$HOME'" : done
  
 EXEC:
+    $a (a=randomshit) => permission denied

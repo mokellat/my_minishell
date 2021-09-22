@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 16:50:04 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/20 18:46:55 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/22 17:19:09 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	exec_cmd(t_shell *shell, t_redir redir, t_cmd cmd, t_res res)
 		close(shell->out);
 	}
 	close_all_pipes(shell->fd, shell->n - 1);
-	cmd.args = realloc(cmd.args, sizeof(T_STRING) * (cmd.n + 1));
-	cmd.args[cmd.n] = 0;
 	if (shell->n != 1)
 		res = execute_builtin_cmd(cmd, shell, &shell->is_builtin);
 	if (shell->is_builtin == TRUE)

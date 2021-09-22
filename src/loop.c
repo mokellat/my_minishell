@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 17:14:43 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/20 18:49:35 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/22 15:47:57 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ T_STRING	get_exec_path(t_shell *shell,
 		&& args[0][0] == '.' && args[0][1] == '/')
 		print_err(args[0], FILE_OR_DIR_NOT_FOUND);
 	i = -1;
+	path = "";
 	while (paths[++i] && *status == -1)
 	{
 		path = join(paths[i], "/");

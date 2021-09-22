@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 12:16:50 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/20 18:53:47 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/22 17:11:09 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,39 @@ void	init_signals(void)
 
 int	handle_ctrl_c(t_shell *shell)
 {
-	put_str("\n");
-	rl_replace_line("", 0);
-	rl_redisplay();
+	shell->ctrl_c_catched = false;
+	dup2(shell->stdin_fd_cpy, 0);
+	close(shell->stdin_fd_cpy);
 	return (1);
 }
 
-void	handle_signal(int event_code)
+void	catch_ctrl_c(t_shell *shell)
 {
+	shell->exit_code = 1;
+	if (!shell->in_heredoc)
+	{
+		printf("\n");
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+	}
+	else
+	{
+		shell->ctrl_c_catched = true;
+		shell->stdin_fd_cpy = dup(0);
+		close(0);
+	}
+	shell_ref(shell);
+}
+
+void	handle_signal(int event_code)
+{	
 	t_shell		*shell;
 
 	(void)event_code;
 	shell = shell_ref(NULL);
 	if (event_code == CTRL_C)
-	{
-		if (shell->in_heredoc || shell->counter)
-			printf("\n");
-		shell->exit_code = 1;
-		shell->ctrl_c_catched = true;
-		shell->stdin_fd_cpy = dup(0);
-		close(0);
-		shell_ref(shell);
-	}
+		catch_ctrl_c(shell);
 	else if (event_code == CTRL_S)
 	{
 		if (!shell->in_child)

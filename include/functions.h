@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 18:02:21 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/20 18:46:55 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/22 17:00:41 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@ t_shell		*shell_ref(t_shell *shell);
 char		*ft_strdup(const char *src);
 char		*ft_strrchr(const char *str, int c);
 char		*ft_strtrim(char const *s1, char const *set);
+char		**ft_reallocate(char **arr, int i);
 #endif

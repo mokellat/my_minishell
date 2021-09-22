@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 18:42:09 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/20 19:44:33 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/22 17:44:06 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,14 @@ int	parse(T_STRING line, t_cmd **cmds)
 			if (final_str[i].files[j].type == RED_IN_SOURCE)
 				if (red_in_source(&(final_str[i].files[j])) == -1)
 					return (-1);
+		// j = -1;
+		// while (++j < final_str[i].n)
+		// {
+		final_str[i].args = ft_reallocate(final_str[i].args, final_str[i].n);
+		// for ( j = 0 ; j < final_str[i].n; j++)
+		// 	puts(final_str[i].args[j]);
+			// while ()
+		// }
 	}
 	*cmds = final_str;
 	return (pipe_split.num_tab);
