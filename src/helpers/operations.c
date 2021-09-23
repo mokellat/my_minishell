@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 18:42:09 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/22 17:51:21 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/23 15:38:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,12 @@ int	parse(T_STRING line, t_cmd **cmds)
 		return ((print_err("", SYNTAX_ERROR) * 0) - 1);
 	pipe_split.pipe_str = split_delimiter_func(line,
 			'|', pipe_split.pipe_str, &pipe_split.num_tab);
+	if (!pipe_split.pipe_str)
+		return ((print_err("", SYNTAX_ERROR) * 0) - 1);
 	final_str = space_delimiter_func(pipe_split.pipe_str,
 			" <>", pipe_split.num_tab);
+	if (!final_str)
+		return ((print_err("", SYNTAX_ERROR) * 0) - 1);
 	i = -1;
 	while (++i < pipe_split.num_tab)
 	{

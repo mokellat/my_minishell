@@ -40,17 +40,14 @@ int	calcul_delimiter(char *str, char *delimiter)
 	return (index);
 }
 
-void	delimiter_found(char *str, char **pipe_split,
+int		delimiter_found(char *str, char **pipe_split,
 char delimiter, t_pipe_vars *p_vars)
 {
 	int	dif;
 	int	k;
 
 	if (p_vars->i == (int)(str_len(str)) - 1 && str[p_vars->i] == delimiter)
-	{
-		write(2, "syntax error\n", 14);
-		exit(EXIT_FAILURE);
-	}
+		return (0);
 	dif = p_vars->i - p_vars->j;
 	if (str[p_vars->i + 1] == '\0')
 		dif = p_vars->i - p_vars->j + 1;
@@ -60,6 +57,7 @@ char delimiter, t_pipe_vars *p_vars)
 		pipe_split[p_vars->index][k++] = str[p_vars->j++];
 	pipe_split[p_vars->index][k] = '\0';
 	p_vars->index++;
+	return (1);
 }
 
 void	quotes_work(char *str, t_pipe_vars	*p_vars)
@@ -93,7 +91,8 @@ int *num_tab)
 		quotes_work(str, &p_vars);
 		if (str[p_vars.i] == delimiter || str[p_vars.i + 1] == '\0')
 		{
-			delimiter_found(str, pipe_split, delimiter, &p_vars);
+			if (!delimiter_found(str, pipe_split, delimiter, &p_vars))
+				return (NULL);
 			p_vars.j = p_vars.i + 1;
 		}
 		p_vars.i++;

@@ -79,9 +79,9 @@ void		is_quoted_assign(t_pars_vars *pars_vars, char **str);
 void		skip_quotes(t_pars_vars *pars_vars, char **str);
 void		args_and_expand(t_pars_vars *pars_vars, char **str);
 char		inside_single_quotes(char *str);
-void		before_delimiter(t_pars_vars *pars_vars, char **str);
+int			before_delimiter(t_pars_vars *pars_vars, char **str);
 void		after_delimiter(t_pars_vars *pars_vars, char **str);
-void		check_redi_null(t_pars_vars *pars_vars, char **str);
+int			check_redi_null(t_pars_vars *pars_vars, char **str);
 void		check_name_after(char **str, t_pars_vars *vars);
 void		assign_name_after(char **str, t_pars_vars *vars);
 #endif

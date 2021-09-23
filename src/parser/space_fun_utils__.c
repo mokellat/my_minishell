@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   space_fun_utils__.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mokellat <mokellat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 13:05:56 by mokellat          #+#    #+#             */
-/*   Updated: 2021/09/20 15:06:33 by mokellat         ###   ########.fr       */
+/*   Updated: 2021/09/23 15:33:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	before_delimiter(t_pars_vars *vars, char **str)
+int		before_delimiter(t_pars_vars *vars, char **str)
 {
 	if (vars->j > 0 && (str[vars->i][vars->j - 1] == '>'
 		|| str[vars->i][vars->j - 1] == '<'))
@@ -25,10 +25,7 @@ void	before_delimiter(t_pars_vars *vars, char **str)
 		vars->redi_lenght = 0;
 		is_quoted_assign(vars, str);
 		if (!ft_strcmp(vars->final_str[vars->i].files[vars->files_i].name, "\0"))
-		{
-			write(2, "syntax error\n", 14);
-			exit(EXIT_FAILURE);
-		}
+			return (0);
 		vars->final_str[vars->i].files[vars->files_i].name[vars->redi_lenght]
 			= 0;
 		vars->final_str[vars->i].files[vars->files_i].name
@@ -38,6 +35,7 @@ void	before_delimiter(t_pars_vars *vars, char **str)
 		vars->final_str[vars->i].files_count++;
 	}
 	skip_quotes(vars, str);
+	return (1);
 }
 
 void	after_delimiter(t_pars_vars *vars, char **str)
@@ -52,14 +50,16 @@ void	after_delimiter(t_pars_vars *vars, char **str)
 	args_and_expand(vars, str);
 }
 
-void	check_redi_null(t_pars_vars *vars, char **str)
+int		check_redi_null(t_pars_vars *vars, char **str)
 {
 	if (vars->j > 0 && (str[vars->i][vars->j - 1] == '>'
 		|| str[vars->i][vars->j - 1] == '<'))
-	{
-		write(2, "syntax error\n", 14);
-		exit(EXIT_FAILURE);
-	}
+	// {
+	// 	write(2, "syntax error\n", 14);
+	// 	exit(EXIT_FAILURE);
+	// }
+		return (0);
+	return (1);
 }
 
 void	check_name_after(char **str, t_pars_vars *vars)
