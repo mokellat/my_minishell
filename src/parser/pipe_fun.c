@@ -40,7 +40,7 @@ int	calcul_delimiter(char *str, char *delimiter)
 	return (index);
 }
 
-int		delimiter_found(char *str, char **pipe_split,
+int	delimiter_found(char *str, char **pipe_split,
 char delimiter, t_pipe_vars *p_vars)
 {
 	int	dif;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   space_fun_utils__.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 13:05:56 by mokellat          #+#    #+#             */
-/*   Updated: 2021/09/23 15:33:15 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/23 16:02:22 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		before_delimiter(t_pars_vars *vars, char **str)
+int	before_delimiter(t_pars_vars *vars, char **str)
 {
 	if (vars->j > 0 && (str[vars->i][vars->j - 1] == '>'
 		|| str[vars->i][vars->j - 1] == '<'))
@@ -50,14 +50,10 @@ void	after_delimiter(t_pars_vars *vars, char **str)
 	args_and_expand(vars, str);
 }
 
-int		check_redi_null(t_pars_vars *vars, char **str)
+int	check_redi_null(t_pars_vars *vars, char **str)
 {
 	if (vars->j > 0 && (str[vars->i][vars->j - 1] == '>'
 		|| str[vars->i][vars->j - 1] == '<'))
-	// {
-	// 	write(2, "syntax error\n", 14);
-	// 	exit(EXIT_FAILURE);
-	// }
 		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 02:08:53 by hamza             #+#    #+#             */
-/*   Updated: 2021/09/20 18:46:55 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/23 16:00:18 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_error	get_err_msg(int index)
 	errors[5] = new_error("numeric argument required", 255);
 	errors[6] = new_error("not a valid identifier", 1);
 	errors[7] = new_error("OLDPWD not set", 1);
-	errors[10] = new_error("syntax error", 2);
+	errors[10] = new_error("syntax error", 258);
 	return (errors[index]);
 }
 
