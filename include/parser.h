@@ -84,4 +84,6 @@ void		after_delimiter(t_pars_vars *pars_vars, char **str);
 int			check_redi_null(t_pars_vars *pars_vars, char **str);
 void		check_name_after(char **str, t_pars_vars *vars);
 void		assign_name_after(char **str, t_pars_vars *vars);
+void		set_vars_check(t_pars_vars	*vars, T_STRING *str);
+void		skip_redi_spaces(t_pars_vars *vars, char **str);
 #endif
