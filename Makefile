@@ -3,7 +3,7 @@
 
 NAME			= 	minishell
 CC				=	gcc
-FLAGS	  		= 	#-Werror -Wextra -Wall
+FLAGS	  		= 	-Werror -Wextra -Wall
 
 UTILS			=	strtools_0.c strtools_4.c strtools_1.c strtools_2.c\
 					split.c ft_itoa.c sf_malloc.c strtools_3.c
@@ -32,16 +32,16 @@ SRC				=	$(ROOT:%.c=./src/%.c)\
 
 OBJ				=	$(SRC:.c=.o)
 DBG_FLAGS		=  -g -fsanitize=address
-READLINE_FLAGS  = -L/usr/include -lreadline -L ~/.brew/opt/readline/lib  -I~/.brew/opt/readline/include
+READLINE_FLAGS  = -lreadline -L ~/.brew/opt/readline/lib  -I ~/.brew/opt/readline/include
 
 all: $(NAME)
 
 $(NAME): $(SRC)
-	@$(CC) ${FLAGS} -I include $(READLINE_FLAGS)  $(SRC)  -lreadline  -o $(NAME)
+	@$(CC) ${FLAGS} -I include $(READLINE_FLAGS)  $(SRC)  -o $(NAME)
 	@rm -rf *.o
 
 san :
-	@$(CC) $(DBG_FLAGS) $(READLINE_FLAGS) -I include -lncurses  $(SRC) -lreadline  -o $(NAME) 
+	@$(CC) $(DBG_FLAGS) ${FLAGS} -I include $(READLINE_FLAGS)  $(SRC)  -o $(NAME)
 	@rm -rf *.o
 	
 $(OBJ): $(SRC)

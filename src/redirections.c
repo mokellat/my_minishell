@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 05:50:16 by hamza             #+#    #+#             */
-/*   Updated: 2021/09/22 17:52:23 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/23 18:38:13 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,7 @@ int	red_in_source(t_file *f)
 		++shell_ref(NULL)->in_heredoc && (line = readline("> "));
 		shell_ref(NULL)->in_heredoc--;
 		if (shell_ref(NULL)->ctrl_c_catched == true)
-		{
-			free(line);
-			return (handle_ctrl_c(shell_ref(NULL)) * 0 - 1);
-		}
+			return (handle_ctrl_c(&line, shell_ref(NULL)) * 0 - 1);
 		else if (!line || str_cmp(line, source))
 			break ;
 		if (f->is_quoted != SINGLE_QUOTE)

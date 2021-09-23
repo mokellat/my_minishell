@@ -6,13 +6,13 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 16:30:09 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/07/14 21:16:55 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/23 18:36:51 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	str_len(char *str)
+int	str_len(char *str)
 {
 	size_t	len;
 

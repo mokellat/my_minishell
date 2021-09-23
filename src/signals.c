@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 12:16:50 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/22 17:11:09 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/23 18:43:48 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@ void	init_signals(void)
 	signal(CTRL_S, handle_signal);
 }
 
-int	handle_ctrl_c(t_shell *shell)
+int	handle_ctrl_c(T_STRING *line, t_shell *shell)
 {
 	shell->ctrl_c_catched = false;
 	dup2(shell->stdin_fd_cpy, 0);
 	close(shell->stdin_fd_cpy);
+	free(*line);
 	return (1);
 }
 

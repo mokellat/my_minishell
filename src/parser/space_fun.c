@@ -88,12 +88,7 @@ t_cmd	*space_delimiter_func(char **str, char *delimiter, int num_strct)
 				return (NULL);
 			if (str[vars.i][vars.j] && (ft_strrchr(delimiter,
 				str[vars.i][vars.j]) || str[vars.i][vars.j + 1] == '\0'))
-			{
-				vars.check = 0;
-				skip_redi_spaces(&vars, str);
-				if (!vars.check)
-					after_delimiter(&vars, str);
-			}
+				set_vars_check(&vars, str);
 			if (!vars.check)
 				vars.j++;
 		}

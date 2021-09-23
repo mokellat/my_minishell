@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 18:02:21 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/22 17:00:41 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/23 18:43:48 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ int			parse(T_STRING line, t_cmd **cmds);
 void		shell_loop(t_shell *shell);
 void		handle_error(T_STRING error);
 void		handle_signal(int event_code);
-size_t		str_len(char *str);
+int			str_len(char *str);
 void		put_char(char c);
 void		put_str(char *str);
 void		fput_char(char c, int fd);
 int			fput_str(char *str, int fd);
-int			handle_ctrl_c(t_shell *shell);
+int			handle_ctrl_c(T_STRING *line, t_shell *shell);
 t_bool		str_cmp(char *s1, char *s2);
 void		swap(T_STRING *xp, T_STRING *yp);
 int			ft_strcmp(char *s1, char *s2);

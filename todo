@@ -1,7 +1,10 @@
 MINE:
     - when unsetting PATH ntning works
     - unset not working
-    - export a="ls -la"
-YOURS:
-    - echo "$TEST='$TEST'"
-    - echo "$TEST=lol$TEST=l"
+    - error code
+    - ctrl_c => showing propmt 2 times
+    YOURS:
+        - echo "$TEST='$TEST'"
+        - echo "$TEST=lol$TEST=l"
+        - echo "$SHELL''$USER"'""""""""""""""""""'
+        - echo '$USER$SHELL' " "' '  " ""'""lol"

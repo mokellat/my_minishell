@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 17:15:48 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/20 18:46:55 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/23 18:35:48 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_res	cmd_pwd(t_shell *shell, T_STRING *args, int n)
 	char	cwd[1024];
 
 	(void)args;
+	n = 0;
 	getcwd(cwd, sizeof(cwd));
 	shell->curr_dir = str_dup(cwd);
 	res.status = TRUE;

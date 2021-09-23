@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 18:42:09 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/23 15:38:46 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/23 18:45:10 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,30 @@ int	is_directory(T_STRING path)
 	return (flag);
 }
 
+int	check_final_str(t_split_pipe pipe_split, t_cmd **final_str)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < pipe_split.num_tab)
+	{
+		if (!multiple_red(pipe_split.pipe_str[i]))
+			return ((print_err("", SYNTAX_ERROR) * 0) - 1);
+		j = -1;
+		while (++j < final_str[i]->files_count)
+			if (final_str[i]->files[j].type == RED_IN_SOURCE)
+				if (red_in_source(&(final_str[i]->files[j])) == -1)
+					return (-1);
+		final_str[i]->args = ft_reallocate(final_str[i]->args, final_str[i]->n);
+	}
+	return (0);
+}
+
 int	parse(T_STRING line, t_cmd **cmds)
 {
 	t_split_pipe	pipe_split;
 	t_cmd			*final_str;
-	int				j;
-	int				i;
 
 	if (!open_quotes(line))
 		return ((print_err("", SYNTAX_ERROR) * 0) - 1);
@@ -44,18 +62,8 @@ int	parse(T_STRING line, t_cmd **cmds)
 			" <>", pipe_split.num_tab);
 	if (!final_str)
 		return ((print_err("", SYNTAX_ERROR) * 0) - 1);
-	i = -1;
-	while (++i < pipe_split.num_tab)
-	{
-		if (!multiple_red(pipe_split.pipe_str[i]))
-			return ((print_err("", SYNTAX_ERROR) * 0) - 1);
-		j = -1;
-		while (++j < final_str[i].files_count)
-			if (final_str[i].files[j].type == RED_IN_SOURCE)
-				if (red_in_source(&(final_str[i].files[j])) == -1)
-					return (-1);
-		final_str[i].args = ft_reallocate(final_str[i].args, final_str[i].n);
-	}
+	if (check_final_str(pipe_split, &final_str) == -1)
+		return (-1);
 	*cmds = final_str;
 	return (pipe_split.num_tab);
 }

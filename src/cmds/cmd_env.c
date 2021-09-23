@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 03:32:12 by hamza             #+#    #+#             */
-/*   Updated: 2021/09/20 18:46:55 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/23 18:35:57 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_res	cmd_env(t_shell *shell, T_STRING *args, int n)
 
 	(void)args;
 	i = -1;
+	n = 0;
 	env = shell->env;
 	output = str_dup("");
 	while (++i < shell->env.keys.size)

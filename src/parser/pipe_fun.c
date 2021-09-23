@@ -100,3 +100,11 @@ int *num_tab)
 	pipe_split[p_vars.index] = 0;
 	return (pipe_split);
 }
+
+void	set_vars_check(t_pars_vars	*vars, T_STRING *str)
+{
+	vars->check = 0;
+	skip_redi_spaces(vars, str);
+	if (!vars->check)
+		after_delimiter(vars, str);
+}
