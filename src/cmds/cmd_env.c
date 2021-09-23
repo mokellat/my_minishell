@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 03:32:12 by hamza             #+#    #+#             */
-/*   Updated: 2021/09/23 18:35:57 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/23 19:45:10 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_res	cmd_env(t_shell *shell, T_STRING *args, int n)
 	output = str_dup("");
 	while (++i < shell->env.keys.size)
 	{
+		// puts(vector_get(&env.keys, i));
 		output = join(output, vector_get(&env.keys, i));
 		output = join(output, "=");
 		output = join(output, vector_get(&env.values, i));

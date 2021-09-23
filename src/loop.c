@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 17:14:43 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/22 15:47:57 by hamza            ###   ########.fr       */
+/*   Updated: 2021/09/23 19:57:30 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// #define HERE fprintf(stderr, "here: %s:%d\n", __FILE__, __LINE__)
 
 T_STRING	*env_to_arr(t_env *env)
 {
@@ -41,6 +43,9 @@ T_STRING	get_exec_path(t_shell *shell,
 	int			i;
 
 	path_var = get_env(shell, "PATH");
+	// here
+	if (!path_var)
+		return ("");
 	paths = split(path_var, ':');
 	if (*status == -1 && strlen(args[0]) > 2
 		&& args[0][0] == '.' && args[0][1] == '/')

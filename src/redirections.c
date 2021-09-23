@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 05:50:16 by hamza             #+#    #+#             */
-/*   Updated: 2021/09/23 18:38:13 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/23 19:52:41 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	red_in(t_redir *redir, t_file file)
 	return (0);
 }
 
-// #define HERE fprintf(stderr, "here: %s:%d\n", __FILE__, __LINE__)
 int	red_in_source(t_file *f)
 {
 	T_STRING	source;

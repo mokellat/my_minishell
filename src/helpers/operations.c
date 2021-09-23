@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 18:42:09 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/23 18:45:10 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/23 19:50:02 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ int	check_final_str(t_split_pipe pipe_split, t_cmd **final_str)
 		if (!multiple_red(pipe_split.pipe_str[i]))
 			return ((print_err("", SYNTAX_ERROR) * 0) - 1);
 		j = -1;
-		while (++j < final_str[i]->files_count)
-			if (final_str[i]->files[j].type == RED_IN_SOURCE)
-				if (red_in_source(&(final_str[i]->files[j])) == -1)
+		while (++j < (*final_str)[i].files_count)
+			if ((*final_str)[i].files[j].type == RED_IN_SOURCE)
+				if (red_in_source(&((*final_str)[i].files[j])) == -1)
 					return (-1);
-		final_str[i]->args = ft_reallocate(final_str[i]->args, final_str[i]->n);
+		(*final_str)[i].args = ft_reallocate((*final_str)[i].args, (*final_str)[i].n);
 	}
 	return (0);
 }

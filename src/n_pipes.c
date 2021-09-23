@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 16:50:04 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/22 17:19:09 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/23 19:47:23 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	exec_cmd(t_shell *shell, t_redir redir, t_cmd cmd, t_res res)
 	close_all_pipes(shell->fd, shell->n - 1);
 	if (shell->n != 1)
 		res = execute_builtin_cmd(cmd, shell, &shell->is_builtin);
-	if (shell->is_builtin == TRUE)
+	if (shell->is_builtin == TRUE && res.output)
 		put_str(res.output);
 	else
 		shell->exit_code = shell_launch(shell, cmd.args);
