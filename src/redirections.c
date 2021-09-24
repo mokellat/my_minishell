@@ -73,6 +73,7 @@ int	red_in_source(t_file *f)
 	}
 	buff && fput_str(buff, fd[1]);
 	free(line);
+	free(buff);
 	return (0 * close(fd[1]));
 }
 

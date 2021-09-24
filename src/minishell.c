@@ -37,7 +37,7 @@ int	main(int ac, char **argv, char **env_vars)
 	shell_loop(&shell);
 	if (!shell.is_exit_printed)
 		put_str("exit");
-	sf_malloc(0, FREE);
+	// sf_malloc(0, FREE);
 	// system("leaks minishell");
 	return (shell.exit_code);
 }

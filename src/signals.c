@@ -23,7 +23,7 @@ int	handle_ctrl_c(T_STRING *line, t_shell *shell)
 	shell->ctrl_c_catched = false;
 	dup2(shell->stdin_fd_cpy, 0);
 	close(shell->stdin_fd_cpy);
-	free(*line);
+	// free(*line);
 	return (1);
 }
 

@@ -44,7 +44,7 @@ char	**ft_reallocate(char **arr, int i)
 	int		j;
 
 	j = 0;
-	new_map = malloc((i + 1) * sizeof(T_STRING));
+	new_map = sf_malloc((i + 1) * sizeof(T_STRING), ADD);
 	while (j < i)
 	{
 		new_map[j] = ft_strdup(arr[j]);

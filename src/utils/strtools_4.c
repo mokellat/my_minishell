@@ -87,7 +87,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (ft_strdup(ptr));
 	ptr1 = fin_tab(s1, set);
 	i = strlen(ptr) - strlen(ptr1);
-	trim = (char *)malloc((i + 1) * sizeof(char));
+	trim = (char *)sf_malloc((i + 1) * sizeof(char), ADD);
 	if (!trim)
 		return (NULL);
 	while (++j < i)
@@ -104,7 +104,7 @@ char	*ft_strdup(const char *src)
 	i = 0;
 	while (src[i])
 		i++;
-	ptr = (char *)malloc(sizeof(char) * (i + 1));
+	ptr = (char *)sf_malloc(sizeof(char) * (i + 1), ADD);
 	if (!ptr)
 		return (NULL);
 	i = 0;
