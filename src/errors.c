@@ -43,7 +43,6 @@ int	print_err(T_STRING path, int error_index)
 	T_STRING	error;
 	t_error		error_msg;
 	int			status_code;
-	// t_shell		*shell;
 
 	error = join("minishell: ", path);
 	error_msg = get_err_msg(error_index);
@@ -53,11 +52,5 @@ int	print_err(T_STRING path, int error_index)
 	error = join(error, "\n");
 	fput_str(error, STDERR_FILENO);
 	status_code = error_msg.status_code;
-	// shell = shell_ref(NULL);
-	// if (error_index == SYNTAX_ERROR)
-	// {
-	// 	shell->status_code = 258;
-	// 	shell_ref(shell);
-	// }
 	return (status_code);
 }

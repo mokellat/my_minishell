@@ -68,13 +68,11 @@ t_res	exit_with_empty_res(t_shell *shell, int error)
 	t_res	res;
 
 	if (error == NUM_ARG_REQ)
-	{
 		res.status = FALSE;
-		shell->is_exit_printed = 1;
-		printf("exit\n");
-	}
 	else
 		res.status = TRUE;
+	shell->is_exit_printed = 1;
+	printf("exit\n");
 	res.output = "";
 	shell->exit_code = print_err("exit", error);
 	return (res);

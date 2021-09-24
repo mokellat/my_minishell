@@ -42,7 +42,8 @@ int	check_final_str(t_split_pipe pipe_split, t_cmd **final_str)
 			if ((*final_str)[i].files[j].type == RED_IN_SOURCE)
 				if (red_in_source(&((*final_str)[i].files[j])) == -1)
 					return (-1);
-		(*final_str)[i].args = ft_reallocate((*final_str)[i].args, (*final_str)[i].n);
+		(*final_str)[i].args
+			= ft_reallocate((*final_str)[i].args, (*final_str)[i].n);
 	}
 	return (0);
 }

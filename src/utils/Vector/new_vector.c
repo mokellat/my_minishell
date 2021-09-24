@@ -21,7 +21,7 @@ void	new_vector(t_vector *this)
 	this->size = 0;
 	if (j == 0)
 	{
-		this->items = malloc(sizeof(void *) * this->capacity); // todo leaks?
+		this->items = malloc(sizeof(void *) * this->capacity);
 		j++;
 	}
 	else

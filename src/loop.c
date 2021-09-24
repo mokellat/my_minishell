@@ -43,13 +43,15 @@ T_STRING	get_exec_path(t_shell *shell,
 	int			i;
 
 	path_var = get_env(shell, "PATH");
-	// here
 	if (!path_var)
 		return ("");
 	paths = split(path_var, ':');
 	if (*status == -1 && strlen(args[0]) > 2
 		&& args[0][0] == '.' && args[0][1] == '/')
-		print_err(args[0], FILE_OR_DIR_NOT_FOUND); // todo check for status code
+	{
+		print_err(args[0], FILE_OR_DIR_NOT_FOUND);
+		return (NULL);
+	}
 	i = -1;
 	path = "";
 	while (paths[++i] && *status == -1)
@@ -69,8 +71,10 @@ int	shell_launch(t_shell *shell, T_STRING *args)
 
 	status = stat(args[0], &stats);
 	path = get_exec_path(shell, args, stats, &status);
+	if (!path)
+		return (127);
 	if (status == -1)
-		return (print_err(args[0], CMD_NOT_FOUND)); // todo check for status code
+		return (print_err(args[0], CMD_NOT_FOUND));
 	status = execve(join(path, args[0]), args, env_to_arr(&shell->env));
 	if (status == -1)
 	{

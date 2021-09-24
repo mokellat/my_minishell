@@ -66,14 +66,13 @@ int	red_in_source(t_file *f)
 		else if (!line || str_cmp(line, source))
 			break ;
 		if (f->is_quoted != SINGLE_QUOTE)
-			line = expand(line);
+			expand_and_delete_garbage(&line);
 		buff = join(buff, line);
 		buff = join(buff, "\n");
 		free(line);
 	}
 	buff && fput_str(buff, fd[1]);
 	free(line);
-	free(buff);
 	return (0 * close(fd[1]));
 }
 
@@ -99,7 +98,7 @@ t_redir	check_for_redirections(t_cmd *cmd)
 			redir.err = red_out_app(&redir, files[i]);
 		if (redir.err)
 		{
-			print_err(files[i].name, redir.err); // todo check for status code
+			print_err(files[i].name, redir.err);
 			return (redir);
 		}
 	}

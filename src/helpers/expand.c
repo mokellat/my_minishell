@@ -37,6 +37,15 @@ int	get_var_value(T_STRING s, T_STRING *expanded_str, int *i, T_STRING *buff)
 	return (0);
 }
 
+void	expand_and_delete_garbage(T_STRING *line)
+{
+	T_STRING	tmp;
+
+	tmp = *line;
+	*line = expand(*line);
+	free(tmp);
+}
+
 T_STRING	expand(T_STRING s)
 {
 	int			i;

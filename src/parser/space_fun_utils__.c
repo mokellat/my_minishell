@@ -46,7 +46,8 @@ void	after_delimiter(t_pars_vars *vars, char **str)
 		vars->final_str[vars->i].args = realloc(vars->final_str[vars->i].args,
 				sizeof(char *) * (vars->final_str[vars->i].n));
 	}
-	vars->final_str[vars->i].args[vars->y] = (char *)sf_malloc(vars->dif + 1, ADD);
+	vars->final_str[vars->i].args[vars->y]
+		= (char *)sf_malloc(vars->dif + 1, ADD);
 	args_and_expand(vars, str);
 }
 

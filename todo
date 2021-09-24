@@ -4,3 +4,6 @@ YOURS:
     - echo "$SHELL''$USER"'""""""""""""""""""'
     - echo '$USER$SHELL' " "' '  " ""'""lol"
     - leaks
+
+MINE :
+    ./mini
