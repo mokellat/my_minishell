@@ -52,7 +52,7 @@ char delimiter, t_pipe_vars *p_vars)
 	if (str[p_vars->i + 1] == '\0')
 		dif = p_vars->i - p_vars->j + 1;
 	k = 0;
-	pipe_split[p_vars->index] = (char *)malloc(dif + 1);
+	pipe_split[p_vars->index] = (char *)sf_malloc(dif + 1, ADD);
 	while (k < dif)
 		pipe_split[p_vars->index][k++] = str[p_vars->j++];
 	pipe_split[p_vars->index][k] = '\0';
@@ -85,7 +85,7 @@ int *num_tab)
 	p_vars.index = 0;
 	p_vars.j = 0;
 	*num_tab = calcul_delimiter(str, "|");
-	pipe_split = malloc(sizeof(char *) * (*num_tab + 1));
+	pipe_split = sf_malloc(sizeof(char *) * (*num_tab + 1), ADD);
 	while (str[p_vars.i])
 	{
 		quotes_work(str, &p_vars);

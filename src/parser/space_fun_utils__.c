@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   space_fun_utils__.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 13:05:56 by mokellat          #+#    #+#             */
-/*   Updated: 2021/09/23 16:02:22 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/24 15:54:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	before_delimiter(t_pars_vars *vars, char **str)
 		redirections(vars, str);
 		quoted(vars, str);
 		vars->final_str[vars->i].files[vars->files_i].name
-			= malloc(vars->redi_lenght - vars->j + 2);
+			= sf_malloc(vars->redi_lenght - vars->j + 2, ADD);
 		vars->redi_lenght = 0;
 		is_quoted_assign(vars, str);
 		if (!ft_strcmp(vars->final_str[vars->i].files[vars->files_i].name, "\0"))
@@ -46,7 +46,7 @@ void	after_delimiter(t_pars_vars *vars, char **str)
 		vars->final_str[vars->i].args = realloc(vars->final_str[vars->i].args,
 				sizeof(char *) * (vars->final_str[vars->i].n));
 	}
-	vars->final_str[vars->i].args[vars->y] = (char *)malloc(vars->dif + 1);
+	vars->final_str[vars->i].args[vars->y] = (char *)sf_malloc(vars->dif + 1, ADD);
 	args_and_expand(vars, str);
 }
 

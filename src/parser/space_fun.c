@@ -30,9 +30,9 @@ void	init_program(t_pars_vars *pars_vars, char **str)
 	pars_vars->files_i = 0;
 	pars_vars->final_str[pars_vars->i].n = 1;
 	pars_vars->final_str[pars_vars->i].args
-		= malloc(sizeof(char *) * (pars_vars->final_str[pars_vars->i].n));
+		= sf_malloc(sizeof(char *) * (pars_vars->final_str[pars_vars->i].n), ADD);
 	pars_vars->final_str[pars_vars->i].files
-		= malloc(sizeof(t_file) * 100);
+		= sf_malloc(sizeof(t_file) * 100, ADD);
 	pars_vars->final_str[pars_vars->i].files_count = 0;
 	str[pars_vars->i] = ft_strtrim(str[pars_vars->i], " ");
 	pars_vars->check = 0;
@@ -42,7 +42,7 @@ void	init_program__(t_pars_vars *vars, int num_strct)
 {
 	vars->i = 0;
 	vars->x = 0;
-	vars->final_str = malloc(sizeof(t_cmd) * num_strct);
+	vars->final_str = sf_malloc(sizeof(t_cmd) * num_strct, ADD);
 }
 
 void	skip_redi_spaces(t_pars_vars *vars, char **str)
