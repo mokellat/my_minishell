@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 03:32:12 by hamza             #+#    #+#             */
-/*   Updated: 2021/09/23 19:45:10 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/24 00:43:59 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@ t_res	cmd_env(t_shell *shell, T_STRING *args, int n)
 	t_env		env;
 
 	(void)args;
+	(void)n;
 	i = -1;
-	n = 0;
 	env = shell->env;
 	output = str_dup("");
 	while (++i < shell->env.keys.size)
 	{
-		// puts(vector_get(&env.keys, i));
 		output = join(output, vector_get(&env.keys, i));
 		output = join(output, "=");
 		output = join(output, vector_get(&env.values, i));

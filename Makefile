@@ -3,7 +3,7 @@
 
 NAME			= 	minishell
 CC				=	gcc
-FLAGS	  		= 	-Werror -Wextra -Wall
+FLAGS	  		= 	#-Werror -Wextra -Wall
 
 UTILS			=	strtools_0.c strtools_4.c strtools_1.c strtools_2.c\
 					split.c ft_itoa.c sf_malloc.c strtools_3.c
@@ -33,15 +33,16 @@ SRC				=	$(ROOT:%.c=./src/%.c)\
 OBJ				=	$(SRC:.c=.o)
 DBG_FLAGS		=  -g -fsanitize=address
 READLINE_FLAGS  = -lreadline -L ~/.brew/opt/readline/lib  -I ~/.brew/opt/readline/include
+LINUX_FLAGS  = -lreadline #-L /home/linuxbrew/.linuxbrew/opt/readline/lib  -I /home/linuxbrew/.linuxbrew/opt/readline/include
 
 all: $(NAME)
 
 $(NAME): $(SRC)
-	@$(CC) ${FLAGS} -I include $(READLINE_FLAGS)  $(SRC)  -o $(NAME)
+	@$(CC) ${FLAGS} -I include $(LINUX_FLAGS)  $(SRC)  -o $(NAME) $(LINUX_FLAGS)
 	@rm -rf *.o
 
 san :
-	@$(CC) $(DBG_FLAGS) ${FLAGS} -I include $(READLINE_FLAGS)  $(SRC)  -o $(NAME)
+	@$(CC) $(DBG_FLAGS) ${FLAGS} -I include $(LINUX_FLAGS) $(SRC)  -o $(NAME) $(LINUX_FLAGS)
 	@rm -rf *.o
 	
 $(OBJ): $(SRC)
@@ -55,6 +56,3 @@ fclean: clean
 	@rm -rf *.o
 
 re: fclean all
-
-bu: fclean
-	@bash git_bu.sh

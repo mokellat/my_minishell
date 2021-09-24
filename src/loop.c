@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 17:14:43 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/23 19:57:30 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/24 00:52:58 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ T_STRING	get_exec_path(t_shell *shell,
 	paths = split(path_var, ':');
 	if (*status == -1 && strlen(args[0]) > 2
 		&& args[0][0] == '.' && args[0][1] == '/')
-		print_err(args[0], FILE_OR_DIR_NOT_FOUND);
+		print_err(args[0], FILE_OR_DIR_NOT_FOUND); // todo check for status code
 	i = -1;
 	path = "";
 	while (paths[++i] && *status == -1)
@@ -70,7 +70,7 @@ int	shell_launch(t_shell *shell, T_STRING *args)
 	status = stat(args[0], &stats);
 	path = get_exec_path(shell, args, stats, &status);
 	if (status == -1)
-		return (print_err(args[0], CMD_NOT_FOUND));
+		return (print_err(args[0], CMD_NOT_FOUND)); // todo check for status code
 	status = execve(join(path, args[0]), args, env_to_arr(&shell->env));
 	if (status == -1)
 	{
@@ -126,7 +126,7 @@ void	shell_loop(t_shell *shell)
 		free(line);
 		if (ret == -1)
 		{
-			shell->exit_code = 2;
+			shell->exit_code = 258;
 			continue ;
 		}
 		result = fork_pipes(ret, cmds, shell);

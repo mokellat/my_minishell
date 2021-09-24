@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 12:16:50 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/23 18:43:48 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/24 01:07:41 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,13 @@ void	handle_signal(int event_code)
 
 	(void)event_code;
 	shell = shell_ref(NULL);
+	if (shell->in_child)
+		return ;
 	if (event_code == CTRL_C)
 		catch_ctrl_c(shell);
 	else if (event_code == CTRL_S)
 	{
-		if (!shell->in_child)
-		{
-			rl_on_new_line();
-			rl_redisplay();
-		}
+		rl_on_new_line();
+		rl_redisplay();
 	}
 }

@@ -14,18 +14,21 @@
 
 void	vector_delete(t_vector *this, int index)
 {
-	int	i;
+	int		i;
+	void	**new_arr;
+	int		j;
 
+	j = 0;
 	i = -1;
-	if (index < 0 || index >= this->size)
-		return ;
-	this->items[index] = NULL;
-	while (++i < this->size - 1)
+	new_arr = sf_malloc(sizeof(void *) * 300, ADD);
+	while (++i < this->size)
 	{
-		this->items[i] = this->items[i + 1];
-		this->items[i + 1] = NULL;
+		if (i != index)
+			new_arr[i - j] = this->items[i];
+		else
+			j = 1;
 	}
+	new_arr[i] = NULL;
+	this->items = new_arr;
 	this->size--;
-	if (this->size > 0 && this->size == this->capacity / 4)
-		vector_resize(this, this->capacity / 2);
 }

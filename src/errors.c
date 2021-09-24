@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 02:08:53 by hamza             #+#    #+#             */
-/*   Updated: 2021/09/23 16:00:18 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/24 00:53:12 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	print_err(T_STRING path, int error_index)
 	T_STRING	error;
 	t_error		error_msg;
 	int			status_code;
+	// t_shell		*shell;
 
 	error = join("minishell: ", path);
 	error_msg = get_err_msg(error_index);
@@ -52,5 +53,11 @@ int	print_err(T_STRING path, int error_index)
 	error = join(error, "\n");
 	fput_str(error, STDERR_FILENO);
 	status_code = error_msg.status_code;
+	// shell = shell_ref(NULL);
+	// if (error_index == SYNTAX_ERROR)
+	// {
+	// 	shell->status_code = 258;
+	// 	shell_ref(shell);
+	// }
 	return (status_code);
 }

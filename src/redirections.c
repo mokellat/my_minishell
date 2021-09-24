@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 05:50:16 by hamza             #+#    #+#             */
-/*   Updated: 2021/09/23 19:52:41 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/24 00:49:07 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ t_redir	check_for_redirections(t_cmd *cmd)
 			redir.err = red_out_app(&redir, files[i]);
 		if (redir.err)
 		{
-			print_err(files[i].name, redir.err);
+			print_err(files[i].name, redir.err); // todo check for status code
 			return (redir);
 		}
 	}
