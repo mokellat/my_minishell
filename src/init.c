@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 17:14:37 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/20 18:46:55 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/24 01:59:07 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	init_shell(t_shell *shell, T_STRING *env_vars)
 	shell->cmds = &cmds;
 	shell->status_code = 0;
 	shell->in_heredoc = 0;
+	shell->is_exit_printed = 0;
 	cmd_pwd(shell, NULL, 0);
 	init_env(&shell->env, env_vars);
 	shell->depth = 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_exit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 15:28:53 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/20 18:46:55 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/24 01:59:45 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ int	str_is_digit(char *str)
 
 	i = -1;
 	while (str[++i])
-		if (str[i] >= '0' && str[i] <= '9')
-			return (1);
-	return (0);
+		if (!(str[i] <= '9' && str[i] >= '0'))
+			return (0);
+	return (1);
 }
 
 t_res	exit_with_empty_res(t_shell *shell, int error)
@@ -68,11 +68,15 @@ t_res	exit_with_empty_res(t_shell *shell, int error)
 	t_res	res;
 
 	if (error == NUM_ARG_REQ)
+	{
 		res.status = FALSE;
+		shell->is_exit_printed = 1;
+		printf("exit\n");
+	}
 	else
 		res.status = TRUE;
 	res.output = "";
-	shell->exit_code = print_err("exit", NUM_ARG_REQ);
+	shell->exit_code = print_err("exit", error);
 	return (res);
 }
 
