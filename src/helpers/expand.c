@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mokellat <mokellat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 18:59:06 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/22 17:49:36 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/25 16:17:45 by mokellat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ T_STRING	expand(T_STRING s)
 		if (s[i] == '$' && ++i)
 		{
 			res = get_var_value(s, &expanded_str, &i, &buff);
+			i--;
 			if (res == 1)
 				break ;
 			else if (res == 2)

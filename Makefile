@@ -32,17 +32,17 @@ SRC				=	$(ROOT:%.c=./src/%.c)\
 
 OBJ				=	$(SRC:.c=.o)
 DBG_FLAGS		=  -g -fsanitize=address
-READLINE_FLAGS  = -lreadline -L ~/.brew/opt/readline/lib  -I ~/.brew/opt/readline/include
+READLINE_FLAGS  = -lreadline -L ~/goinfre/.brew/opt/readline/lib  -I ~/goinfre/.brew/opt/readline/include
 LINUX_FLAGS  = -lreadline #-L /home/linuxbrew/.linuxbrew/opt/readline/lib  -I /home/linuxbrew/.linuxbrew/opt/readline/include
 
 all: $(NAME)
 
 $(NAME): $(SRC)
-	@$(CC) ${FLAGS} -I include $(READLINE_FLAGS)  $(SRC)  -o $(NAME) 
+	@$(CC) ${FLAGS} -I include $(READLINE_FLAGS)  $(SRC)  -o $(NAME) -g
 	@rm -rf *.o
 
 san :
-	@$(CC) $(DBG_FLAGS) ${FLAGS} -I include $(READLINE_FLAGS) $(SRC)  -o $(NAME)
+	@$(CC) $(DBG_FLAGS) ${FLAGS} -I include $(READLINE_FLAGS) $(SRC)  -o $(NAME) -g
 	@rm -rf *.o
 	
 $(OBJ): $(SRC)

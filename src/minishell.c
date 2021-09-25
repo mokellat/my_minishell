@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mokellat <mokellat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 16:50:19 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/24 16:03:20 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/25 19:23:23 by mokellat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,25 @@ int	main(int ac, char **argv, char **env_vars)
 // 	t_split_pipe	pipe_split;
 // 	t_cmd			*final_str;
 
-// 	mystr = " 'echo'ali    >       'bro'         a hey | $HOME<<'dude' | 'l''s' | cat<  1";
-// 	mystr = " 'echo'ali    >       bro         a hey ";
-// 	mystr = "echo \"|\" |" ; // we should take it as syntax error
-// 	mystr = "|" ; // syntax error
-// 	mystr = "\"l\"\"s\"                 >>           'med ali'" ; // syntax error
-// 	mystr = "echo \"$HOME\"" ; // todo not working
-// 	mystr = "echo << a";
-// 	mystr = "echo \"$s\"Make\'$s\'";
-// 	mystr = "unset \"'\" test";
-// 	mystr = " ls >";
-// 	mystr = " 'echo' ali >> \"name name name\"okay ca marche";
+// 	// mystr = " 'echo'ali    >       'bro'         a hey | $HOME<<'dude' | 'l''s' | cat<  1";
+// 	// mystr = " 'echo'ali    >       bro         a hey ";
+// 	// mystr = "echo \"|\" |" ; // we should take it as syntax error
+// 	// mystr = "|" ; // syntax error
+// 	// mystr = "\"l\"\"s\"                 >>           'med ali'" ; // syntax error
+// 	// mystr = "echo \"$HOME\"" ; // todo not working
+// 	// mystr = "echo << a";
+// 	// mystr = "echo \"$s\"Make\'$s\'";
+// 	// mystr = "unset \"'\" test";
+// 	// mystr = " ls >";
+// 	// mystr = " 'echo' ali >> \"name name name\"okay ca marche";
 // 	// mystr = " 'echo'ali >> 'name name name'\"$HOME\"";
+// 	// mystr = "echo \"$TEST='$TEST'\"";
+// 	mystr = "export a='
+ls -la'";
+// 	mystr = "echo \"''\"";
+// 	// mystr = "echo '\"\"'";
+// 	// mystr = "echo '""""""""""""""""""'";
+
 // 	//| \'$ça\' << '\"name' | 'ali is the best' | cat <\"1\" >'1'"; //fix this bro
 // 	if(!open_quotes(mystr))
 // 	{

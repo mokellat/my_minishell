@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "__mutex_base": "c",
-        "stdio.h": "c",
-        "minishell.h": "c"
-    }
-}

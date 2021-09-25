@@ -37,6 +37,7 @@ void	init_program(t_pars_vars *pars_vars, char **str)
 	pars_vars->final_str[pars_vars->i].files_count = 0;
 	str[pars_vars->i] = ft_strtrim(str[pars_vars->i], " ");
 	pars_vars->check = 0;
+	pars_vars->name_is_quoted = 0;
 }
 
 void	init_program__(t_pars_vars *vars, int num_strct)
@@ -74,6 +75,19 @@ void	skip_redi_spaces(t_pars_vars *vars, char **str)
 		vars->dif = vars->j - vars->k + 1;
 }
 
+// T_STRING	expands(T_STRING	line, t_pars_vars *vars)
+// {
+// 	int		i;
+
+// 	i = -1;
+// 	while (line[++vars->i])
+// 	{
+// 		if ()
+
+// 	}
+// 	return (line);	
+// }
+
 t_cmd	*space_delimiter_func(char **str, char *delimiter, int num_strct)
 {
 	t_pars_vars	vars;
@@ -82,6 +96,8 @@ t_cmd	*space_delimiter_func(char **str, char *delimiter, int num_strct)
 	while (str[vars.i])
 	{
 		init_program(&vars, str);
+		// str[vars.i] = expand(str[vars.i]);
+		// puts(str[vars.i]);
 		while (vars.j < (int)str_len(str[vars.i]))
 		{
 			vars.check = 0;
