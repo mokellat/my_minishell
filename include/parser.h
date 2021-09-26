@@ -55,6 +55,7 @@ typedef struct s_pars_vars
 	int		files_i;
 	int		check;
 	int		name_is_quoted;
+	int		is_quoted;
 }	t_pars_vars;
 
 typedef struct s_pipe_vars_

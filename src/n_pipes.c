@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   n_pipes.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 16:50:04 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/23 19:47:23 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/26 22:17:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	spawn_proc(t_cmd cmd, t_shell *shell)
 	shell->redir_has_error = false;
 	args = cmd.args;
 	if ((redir.out_file || redir.in_file) && !args[0])
-		return (0);
+		return (1);
 	if (redir.err)
 	{
 		shell->exit_code = 1;
@@ -101,6 +101,7 @@ t_res	fork_pipes(int n, t_cmd *cmd, t_shell *shell)
 	int		i;
 	t_res	res;
 
+	res.status = TRUE;
 	shell->in_child = 1;
 	shell->fd = sf_malloc(sizeof(int *) * n, ADD);
 	i = -1;

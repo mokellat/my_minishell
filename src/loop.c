@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 17:14:43 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/24 00:52:58 by hamza            ###   ########.fr       */
+/*   Updated: 2021/09/26 23:54:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int	shell_launch(t_shell *shell, T_STRING *args)
 	int			exit_code;
 	T_STRING	path;
 
+	if (!args[0][0])
+		return (print_err("''", CMD_NOT_FOUND)); // todo check output
 	status = stat(args[0], &stats);
 	path = get_exec_path(shell, args, stats, &status);
 	if (!path)

@@ -32,6 +32,7 @@ void	init_program(t_pars_vars *pars_vars, char **str)
 	pars_vars->final_str[pars_vars->i].args
 		= sf_malloc(
 			sizeof(char *) * (pars_vars->final_str[pars_vars->i].n), ADD);
+	pars_vars->final_str[pars_vars->i].args[0] = NULL;
 	pars_vars->final_str[pars_vars->i].files
 		= sf_malloc(sizeof(t_file) * 100, ADD);
 	pars_vars->final_str[pars_vars->i].files_count = 0;

@@ -37,6 +37,13 @@ int	redi_exec(int i, char *str, int *index)
 				(*index)++;
 			}
 		}
+		if (*index == 1)
+		{
+			while (str[i] && ft_isalpha(str[i]))
+				i++;
+			if (str[i] && str[i] == ' ')
+				(*index) = 0;
+		}
 	}
 	return (1);
 }

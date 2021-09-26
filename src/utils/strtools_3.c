@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strtools_3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:27:27 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/22 17:08:26 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/26 23:54:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ char	**ft_reallocate(char **arr, int i)
 	char	**new_map;
 	int		j;
 
+	// if (i == 1)
+	// {
+	// 	arr[0] = NULL;
+	// 	return (arr);
+	// }
 	j = 0;
 	new_map = sf_malloc((i + 1) * sizeof(T_STRING), ADD);
 	while (j < i)

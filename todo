@@ -4,6 +4,11 @@ YOURS:
     - echo "$SHELL''$USER"'""""""""""""""""""'
     - echo '$USER$SHELL' " "' '  " ""'""lol"
     - leaks
-
-MINE :
-    ./mini
+    - $abc => nting
+    - "" => command not found
+    -<< a << b << c cat => syntax error
+    when only redirection [n = 1] must be 0
+        < 1 => seg 
+        << 1 => seg
+        >> 1 => seg
+        > 1 => seg

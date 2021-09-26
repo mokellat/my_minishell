@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mokellat <mokellat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 16:50:19 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/25 19:23:23 by mokellat         ###   ########.fr       */
+/*   Updated: 2021/09/26 21:29:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,10 @@ int	main(int ac, char **argv, char **env_vars)
 // 	// mystr = " 'echo' ali >> \"name name name\"okay ca marche";
 // 	// mystr = " 'echo'ali >> 'name name name'\"$HOME\"";
 // 	// mystr = "echo \"$TEST='$TEST'\"";
-// 	mystr = "export a='
-ls -la'";
-// 	mystr = "echo \"''\"";
+// 	// mystr = "export a='ls -la'";
+// 	// mystr = "echo \"''\"";
+// 	mystr = "<< a ls | cat -e";
+// 	mystr = "<< a << b << c cat";
 // 	// mystr = "echo '\"\"'";
 // 	// mystr = "echo '""""""""""""""""""'";
 

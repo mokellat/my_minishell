@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 18:42:09 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/23 19:50:02 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/26 21:56:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,11 @@ int	check_final_str(t_split_pipe pipe_split, t_cmd **final_str)
 			if ((*final_str)[i].files[j].type == RED_IN_SOURCE)
 				if (red_in_source(&((*final_str)[i].files[j])) == -1)
 					return (-1);
-		(*final_str)[i].args
-			= ft_reallocate((*final_str)[i].args, (*final_str)[i].n);
+		if (!(*final_str)[i].args[0])
+			(*final_str)[i].n = 0;
+		else
+			(*final_str)[i].args
+				= ft_reallocate((*final_str)[i].args, (*final_str)[i].n);
 	}
 	return (0);
 }
@@ -52,6 +55,7 @@ int	parse(T_STRING line, t_cmd **cmds)
 {
 	t_split_pipe	pipe_split;
 	t_cmd			*final_str;
+	t_pars_vars vars;
 
 	if (!open_quotes(line))
 		return ((print_err("", SYNTAX_ERROR) * 0) - 1);
