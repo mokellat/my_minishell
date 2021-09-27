@@ -1,9 +1,7 @@
 YOURS:
-    - echo s [one character get ignored]
     - more then 2 pipes will break
     - signals fucked up
         - ctrl-c not working in minishell childs
-    - ctrl-\ fucked up after executing a child
     -
 DONE:
     - echo "$TEST='$TEST'"

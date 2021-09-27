@@ -40,6 +40,7 @@ typedef struct s_pipeline
 	t_file	*files;
 	int		files_count;
 	int		n;
+	int		is_empty_string_quoted;
 }	t_cmd;
 
 typedef struct s_pars_vars

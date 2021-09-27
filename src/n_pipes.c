@@ -6,7 +6,7 @@
 /*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 16:50:04 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/27 15:32:06 by hamza            ###   ########.fr       */
+/*   Updated: 2021/09/27 17:23:10 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int	spawn_proc(t_cmd cmd, t_shell *shell)
 	redir = check_for_redirections(&cmd);
 	shell->redir_has_error = false;
 	args = cmd.args;
-	if ((redir.out_file || redir.in_file) && !args[0])
+	if ((redir.out_file || redir.in_file) && !args[0]
+		|| (cmd.is_empty_string_quoted && cmd.n == 1))
 		return (1);
 	if (redir.err)
 	{
@@ -103,7 +104,6 @@ t_res	fork_pipes(int n, t_cmd *cmd, t_shell *shell)
 
 	res.status = TRUE;
 	shell->in_child = 1;
-	printf("%d\n", n);
 	shell->fd = sf_malloc(sizeof(int *) * n, ADD);
 	i = -1;
 	while (++i < n)

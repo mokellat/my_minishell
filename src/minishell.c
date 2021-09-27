@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 16:50:19 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/26 21:29:16 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/27 16:31:51 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int ac, char **argv, char **env_vars)
 	shell_loop(&shell);
 	if (!shell.is_exit_printed)
 		put_str("exit");
-	// sf_malloc(0, FREE);
+	sf_malloc(0, FREE);
 	// system("leaks minishell");
 	return (shell.exit_code);
 }

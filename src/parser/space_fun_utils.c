@@ -6,7 +6,7 @@
 /*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 15:20:37 by mokellat          #+#    #+#             */
-/*   Updated: 2021/09/27 14:17:39 by hamza            ###   ########.fr       */
+/*   Updated: 2021/09/27 17:58:53 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,10 +159,12 @@ void	args_and_expand(t_pars_vars *vars, char **str)
 		vars->k++;
 		vars->x++;
 	}
-	if (end != (vars->k - 1))
+	if (end != vars->k)
 		arg = join(arg, custom_substr(str[vars->i], end, vars->k, FALSE));
 	if (vars->dif == 1)
 		arg = str[vars->i];
+	else if (vars->dif != 0 && !str_len(arg))
+		vars->final_str[vars->i].is_empty_string_quoted = 1;
 	vars->final_str[vars->i].args[vars->y] = arg;
 	vars->k = vars->j + 1;
 	vars->x = 0;

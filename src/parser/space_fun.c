@@ -39,6 +39,7 @@ void	init_program(t_pars_vars *pars_vars, char **str)
 	str[pars_vars->i] = ft_strtrim(str[pars_vars->i], " ");
 	pars_vars->check = 0;
 	pars_vars->name_is_quoted = 0;
+	pars_vars->final_str[pars_vars->i].is_empty_string_quoted = 0;
 }
 
 void	init_program__(t_pars_vars *vars, int num_strct)
