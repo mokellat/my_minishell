@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   n_pipes.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 16:50:04 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/26 22:17:49 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/27 15:32:06 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ t_res	fork_pipes(int n, t_cmd *cmd, t_shell *shell)
 
 	res.status = TRUE;
 	shell->in_child = 1;
+	printf("%d\n", n);
 	shell->fd = sf_malloc(sizeof(int *) * n, ADD);
 	i = -1;
 	while (++i < n)
