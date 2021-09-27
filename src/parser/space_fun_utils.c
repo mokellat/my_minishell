@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   space_fun_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 15:20:37 by mokellat          #+#    #+#             */
-/*   Updated: 2021/09/27 00:37:47 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/27 04:01:27 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void	args_and_expand(t_pars_vars *vars, char **str)
 	// while (vars->k < strlen(str[vars->i]))
 	while (vars->x < vars->dif)
 	{
-		printf("%d|%d|%d\n", vars->k, vars->is_quoted, (is_quote(str[vars->i][vars->k]) == vars->is_quoted));
+		// printf("%d|%d|%d\n", vars->k, vars->is_quoted, (is_quote(str[vars->i][vars->k]) == vars->is_quoted));
 		if((i = is_quote(str[vars->i][vars->k])) && ((is_quote(str[vars->i][vars->k]) == vars->is_quoted) || vars->is_quoted == 0))
 		{
 			if (is_quote(str[vars->i][vars->k]) == vars->is_quoted)
@@ -139,13 +139,15 @@ void	args_and_expand(t_pars_vars *vars, char **str)
 				end = vars->k;
 				if (vars->is_quoted == 1)
 				{
-					printf("exp2 : %s\n", join( vars->final_str[vars->i].args[vars->y], sub_str(str[vars->i], start + 1, end - (start + 1))));
+					// printf("exp2 : %s\n", sub_str(str[vars->i], start + 1, end - (start + 1)));
 					vars->final_str[vars->i].args[vars->y] = join( vars->final_str[vars->i].args[vars->y], sub_str(str[vars->i], start + 1, end - (start + 1)));
 				}
 				else
 				{
-					printf("exp3 : %s\n",  join( vars->final_str[vars->i].args[vars->y], expand(sub_str(str[vars->i], start + 1, end - (start + 1)))));
+					// printf("exp3 : %s\n",  expand(sub_str(str[vars->i], start + 1, end - (start + 1))));
+					// printf("before : [%s]\n", vars->final_str[vars->i].args[vars->y]);
 					vars->final_str[vars->i].args[vars->y] = join( vars->final_str[vars->i].args[vars->y], expand(sub_str(str[vars->i], start + 1, end - (start + 1))));
+					// printf("after : [%s]\n", vars->final_str[vars->i].args[vars->y]);
 				}
 				vars->is_quoted = 0;
 			}
@@ -154,13 +156,13 @@ void	args_and_expand(t_pars_vars *vars, char **str)
 				if (vars->is_quoted == 0 && end != (vars->k - 1))
 				{
 					// puts("hey");
-					printf("exp : %s\n", join(vars->final_str[vars->i].args[vars->y], expand(sub_str(str[vars->i], end, vars->k  - end))));
-					vars->final_str[vars->i].args[vars->y] = join(vars->final_str[vars->i].args[vars->y], expand(sub_str(str[vars->i], end, vars->k  - end - 1)));
+					// printf("exp : [%s]\n", expand(sub_str(str[vars->i], end, vars->k  - end)));
+					vars->final_str[vars->i].args[vars->y] = join(vars->final_str[vars->i].args[vars->y], expand(sub_str(str[vars->i], end, vars->k  - end )));
 				}
 				start = vars->k;
 				vars->is_quoted = i;
 			}
-			(vars->dif)--;
+			// (vars->dif)--;
 			// printf("at : %c\n", str[vars->i][vars->k]);
 		}
 			// vars->final_str[vars->i].args[vars->y][(vars->x)++]
@@ -169,30 +171,10 @@ void	args_and_expand(t_pars_vars *vars, char **str)
 		vars->x++;
 	}
 	if (end != (vars->k - 1))
+	{
 		vars->final_str[vars->i].args[vars->y] = join( vars->final_str[vars->i].args[vars->y], expand(sub_str(str[vars->i], end, vars->k  - end)));
-	puts(vars->final_str[vars->i].args[vars->y]);
-	// if (!inside_single_quotes(vars->final_str[vars->i].args[vars->y]))
-	// {
-	// 	if (vars->name_is_quoted == 0)
-	// 		vars->final_str[vars->i].args[vars->y]
-	// 			= expand(ft_strtrim(vars->final_str[vars->i].args[vars->y], "\'\""));
-	// 	else if(vars->name_is_quoted == 1)
-	// 		vars->final_str[vars->i].args[vars->y]
-	// 			= expand(ft_strtrim(vars->final_str[vars->i].args[vars->y], "\'"));
-	// 	else if (vars->name_is_quoted == 2)
-	// 		vars->final_str[vars->i].args[vars->y]
-	// 			= expand(ft_strtrim(vars->final_str[vars->i].args[vars->y], "\""));
-	// }
-	// else
-	// {
-	// 	if(vars->name_is_quoted == 1)
-	// 		vars->final_str[vars->i].args[vars->y]
-	// 			= ft_strtrim(vars->final_str[vars->i].args[vars->y], "\'");
-	// 	else if(vars->name_is_quoted == 2)
-	// 		vars->final_str[vars->i].args[vars->y]
-	// 			= ft_strtrim(vars->final_str[vars->i].args[vars->y], "\"");
-		
-	// }
+		// printf("exp3 : [%s]\n", expand(sub_str(str[vars->i], end, vars->k  - end)));
+	}
 	vars->k = vars->j + 1;
 	vars->x = 0;
 	(vars->y)++;

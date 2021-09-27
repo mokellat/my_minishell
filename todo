@@ -1,4 +1,6 @@
 YOURS:
+
+DONE:
     - echo "$TEST='$TEST'"
     - echo "$TEST=lol$TEST=l"
     - echo "$SHELL''$USER"'""""""""""""""""""'
