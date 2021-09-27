@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   space_fun_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 15:20:37 by mokellat          #+#    #+#             */
-/*   Updated: 2021/09/27 17:58:53 by hamza            ###   ########.fr       */
+/*   Updated: 2021/09/27 19:44:12 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,65 +107,25 @@ void	skip_quotes(t_pars_vars *vars, char **str)
 	}
 }
 
-int		is_quote(int c)
-{
-	if (c == '\'')
-		return (1);
-	if (c == '\"')
-		return (2);
-	return (0);
-}
-
-T_STRING	custom_substr(T_STRING str, int start, int end, int is_single)
-{
-	T_STRING	new_str;
-
-	new_str = sub_str(str, start, end - start);
-	if (is_single != 1)
-		return expand(new_str);
-	return (new_str);
-}
-
 void	args_and_expand(t_pars_vars *vars, char **str)
 {
-	int			i;
 	int			start;
 	int			end;
-	T_STRING	arg;
 
-	arg = "";
+	vars->arg = "";
 	vars->is_quoted = 0;
 	start = vars->k;
 	end = vars->k;
 	while (vars->x < vars->dif)
-	{
-		if((i = is_quote(str[vars->i][vars->k])) &&((is_quote(str[vars->i][vars->k]) == vars->is_quoted) || vars->is_quoted == 0))
-		{
-			if (is_quote(str[vars->i][vars->k]) == vars->is_quoted)
-			{
-				end = vars->k;
-				arg = join(arg, custom_substr(str[vars->i], start + 1, end, vars->is_quoted));
-				vars->is_quoted = 0;
-				end++;
-			}
-			else
-			{
-				if (vars->is_quoted == 0 && end != (vars->k - 1))
-					arg = join(arg, custom_substr(str[vars->i], end, vars->k, FALSE));
-				start = vars->k;
-				vars->is_quoted = i;
-			}
-		}
-		vars->k++;
-		vars->x++;
-	}
+		args_expand_exec(vars, str, &start, &end);
 	if (end != vars->k)
-		arg = join(arg, custom_substr(str[vars->i], end, vars->k, FALSE));
+		vars->arg = join(vars->arg,
+				custom_substr(str[vars->i], end, vars->k, FALSE));
 	if (vars->dif == 1)
-		arg = str[vars->i];
-	else if (vars->dif != 0 && !str_len(arg))
+		vars->arg = str[vars->i];
+	else if (vars->dif != 0 && !str_len(vars->arg))
 		vars->final_str[vars->i].is_empty_string_quoted = 1;
-	vars->final_str[vars->i].args[vars->y] = arg;
+	vars->final_str[vars->i].args[vars->y] = vars->arg;
 	vars->k = vars->j + 1;
 	vars->x = 0;
 	(vars->y)++;

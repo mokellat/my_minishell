@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   n_pipes.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 16:50:04 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/27 17:23:10 by hamza            ###   ########.fr       */
+/*   Updated: 2021/09/27 19:34:12 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	close_all_pipes(int **fd, int n)
-{
-	int	i;
-
-	i = -1;
-	while (++i < n)
-	{
-		close(fd[i][0]);
-		close(fd[i][1]);
-	}
-}
 
 void	exec_cmd(t_shell *shell, t_redir redir, t_cmd cmd, t_res res)
 {
@@ -60,7 +48,7 @@ int	spawn_proc(t_cmd cmd, t_shell *shell)
 	redir = check_for_redirections(&cmd);
 	shell->redir_has_error = false;
 	args = cmd.args;
-	if ((redir.out_file || redir.in_file) && !args[0]
+	if (((redir.out_file || redir.in_file) && !args[0])
 		|| (cmd.is_empty_string_quoted && cmd.n == 1))
 		return (1);
 	if (redir.err)
@@ -97,6 +85,21 @@ void	catch_child_proc_exit_status(t_shell *shell)
 	}
 }
 
+void	name_it(int n, t_cmd *cmd, t_shell *shell, t_res *res)
+{
+	int	i;
+
+	i = -1;
+	while (++i < n)
+	{
+		i == (n - 1) && (shell->last = TRUE);
+		i != (n - 1) && pipe(shell->fd[i]);
+		shell->out = shell->fd[i][1];
+		res->status = spawn_proc(cmd[i], shell);
+		shell->in = shell->fd[i][0];
+	}
+}
+
 t_res	fork_pipes(int n, t_cmd *cmd, t_shell *shell)
 {
 	int		i;
@@ -111,15 +114,7 @@ t_res	fork_pipes(int n, t_cmd *cmd, t_shell *shell)
 	shell->last = FALSE;
 	shell->in = 0;
 	shell->n = n;
-	i = -1;
-	while (++i < n)
-	{
-		i == (n - 1) && (shell->last = TRUE);
-		i != (n - 1) && pipe(shell->fd[i]);
-		shell->out = shell->fd[i][1];
-		res.status = spawn_proc(cmd[i], shell);
-		shell->in = shell->fd[i][0];
-	}
+	name_it(n, cmd, shell, &res);
 	close_all_pipes(shell->fd, n - 1);
 	if (!shell->redir_has_error)
 		catch_child_proc_exit_status(shell);

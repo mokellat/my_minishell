@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 12:16:50 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/24 01:07:41 by hamza            ###   ########.fr       */
+/*   Updated: 2021/09/27 19:34:50 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,17 @@ void	handle_signal(int event_code)
 	{
 		rl_on_new_line();
 		rl_redisplay();
+	}
+}
+
+void	close_all_pipes(int **fd, int n)
+{
+	int	i;
+
+	i = -1;
+	while (++i < n)
+	{
+		close(fd[i][0]);
+		close(fd[i][1]);
 	}
 }

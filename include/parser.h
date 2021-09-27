@@ -57,6 +57,7 @@ typedef struct s_pars_vars
 	int		check;
 	int		name_is_quoted;
 	int		is_quoted;
+	char	*arg;
 }	t_pars_vars;
 
 typedef struct s_pipe_vars_
@@ -89,4 +90,8 @@ void		check_name_after(char **str, t_pars_vars *vars);
 void		assign_name_after(char **str, t_pars_vars *vars);
 void		set_vars_check(t_pars_vars	*vars, T_STRING *str);
 void		skip_redi_spaces(t_pars_vars *vars, char **str);
+int			is_quote(int c);
+T_STRING	custom_substr(T_STRING str, int start, int end, int is_single);
+void		args_expand_exec(t_pars_vars *vars, char **str,
+				int *start, int *end);
 #endif

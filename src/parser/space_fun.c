@@ -98,8 +98,6 @@ t_cmd	*space_delimiter_func(char **str, char *delimiter, int num_strct)
 	while (str[vars.i])
 	{
 		init_program(&vars, str);
-		// str[vars.i] = expand(str[vars.i]);
-		// puts(str[vars.i]);
 		while (vars.j < (int)str_len(str[vars.i]))
 		{
 			vars.check = 0;

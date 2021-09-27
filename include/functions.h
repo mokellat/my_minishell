@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 18:02:21 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/23 18:43:48 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/27 19:34:35 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,6 @@ char		*ft_strrchr(const char *str, int c);
 char		*ft_strtrim(char const *s1, char const *set);
 char		**ft_reallocate(char **arr, int i);
 void		expand_and_delete_garbage(T_STRING *line);
+void		name_it(int n, t_cmd *cmd, t_shell *shell, t_res *res);
+void		close_all_pipes(int **fd, int n);
 #endif

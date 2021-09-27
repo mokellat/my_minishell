@@ -20,7 +20,7 @@ VECTOR			= new_vector.c     vector_free.c       vector_resize.c\
 ROOT			=  errors.c  init.c  loop.c  minishell.c  n_pipes.c \
 				   redirections.c  signals.c
 
-PARSER          = pipe_fun.c redirections_errors.c space_fun.c space_fun_utils.c space_fun_utils__.c
+PARSER          = pipe_fun.c redirections_errors.c space_fun.c space_fun_utils.c space_fun_utils__.c final_utils.c
 
 SRC				=	$(ROOT:%.c=./src/%.c)\
 					$(PARSER:%.c=./src/parser/%.c)\
@@ -32,17 +32,17 @@ SRC				=	$(ROOT:%.c=./src/%.c)\
 
 OBJ				=	$(SRC:.c=.o)
 DBG_FLAGS		=  -g -fsanitize=address
-READLINE_FLAGS  = -lreadline -L ~/goinfre/.brew/opt/readline/lib  -I ~/goinfre/.brew/opt/readline/include
+READLINE_FLAGS  = -lreadline -L ~/.brew/opt/readline/lib  -I ~/.brew/opt/readline/include
 LINUX_FLAGS  = -lreadline #-L /home/linuxbrew/.linuxbrew/opt/readline/lib  -I /home/linuxbrew/.linuxbrew/opt/readline/include
 
 all: $(NAME)
 
 $(NAME): $(SRC)
-	@$(CC) ${FLAGS} -I include $(READLINE_FLAGS)  $(SRC)  -o $(NAME) -g  $(READLINE_FLAGS)
+	@$(CC) ${FLAGS} -I include $(READLINE_FLAGS)  $(SRC)  -o $(NAME) -g 
 	@rm -rf *.o
 
 san :
-	@$(CC) $(DBG_FLAGS) ${FLAGS} -I include $(READLINE_FLAGS) $(SRC)  -o $(NAME) -g  $(READLINE_FLAGS)
+	@$(CC) $(DBG_FLAGS) ${FLAGS} -I include $(READLINE_FLAGS) $(SRC)  -o $(NAME) -g 
 	@rm -rf *.o
 	
 $(OBJ): $(SRC)

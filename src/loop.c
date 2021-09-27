@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 17:14:43 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/26 23:54:18 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/27 18:42:57 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// #define HERE fprintf(stderr, "here: %s:%d\n", __FILE__, __LINE__)
 
 T_STRING	*env_to_arr(t_env *env)
 {
@@ -70,7 +68,7 @@ int	shell_launch(t_shell *shell, T_STRING *args)
 	T_STRING	path;
 
 	if (!args[0][0])
-		return (print_err("''", CMD_NOT_FOUND)); // todo check output
+		return (print_err("''", CMD_NOT_FOUND));
 	status = stat(args[0], &stats);
 	path = get_exec_path(shell, args, stats, &status);
 	if (!path)

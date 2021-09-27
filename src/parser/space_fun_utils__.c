@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   space_fun_utils__.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 13:05:56 by mokellat          #+#    #+#             */
-/*   Updated: 2021/09/26 21:28:33 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/27 18:15:39 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	after_delimiter(t_pars_vars *vars, char **str)
 	}
 	vars->final_str[vars->i].args[vars->y]
 		= (char *)sf_malloc(vars->dif + 1, ADD);
-	// printf("[%s]\n", vars->final_str[vars->i].args[vars->y]);
 	args_and_expand(vars, str);
 }
 

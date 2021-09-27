@@ -12,6 +12,28 @@
 
 #include "minishell.h"
 
+int	redi_exec_exec(int i, char *str, int *index)
+{
+	if (str[i] == '>' || str[i] == '<')
+	{
+		i++;
+		if (str[i] == ' ' && str[i])
+		{
+			while (str[i] && str[i] == ' ')
+				i++;
+			if (str[i] == '>' || str[i] == '<')
+				return (0);
+			return (1);
+		}
+		while ((str[i] == '>' || str[i] == '<'))
+		{
+			i++;
+			(*index)++;
+		}
+	}
+	return (1);
+}
+
 int	redi_exec(int i, char *str, int *index)
 {
 	while (++i < (int)strlen(str))
@@ -20,23 +42,8 @@ int	redi_exec(int i, char *str, int *index)
 			return (0);
 		if (str[i] == '<' && str[i + 1] == '>')
 			return (0);
-		if (str[i] == '>' || str[i] == '<')
-		{
-			i++;
-			if (str[i] == ' ' && str[i])
-			{
-				while (str[i] && str[i] == ' ')
-					i++;
-				if (str[i] == '>' || str[i] == '<')
-					return (0);
-				return (1);
-			}
-			while ((str[i] == '>' || str[i] == '<'))
-			{
-				i++;
-				(*index)++;
-			}
-		}
+		if (!redi_exec_exec(i, str, index))
+			return (0);
 		if (*index == 1)
 		{
 			while (str[i] && ft_isalpha(str[i]))
