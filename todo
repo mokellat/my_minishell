@@ -1,4 +1,5 @@
 YOURS:
+    - echo s [one character get ignored]
 
 DONE:
     - echo "$TEST='$TEST'"
