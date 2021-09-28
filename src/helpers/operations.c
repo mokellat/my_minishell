@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 18:42:09 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/27 18:54:56 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/27 20:39:29 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	parse(T_STRING line, t_cmd **cmds)
 {
 	t_split_pipe	pipe_split;
 	t_cmd			*final_str;
-	t_pars_vars		vars;
 
 	if (!open_quotes(line))
 		return ((print_err("", SYNTAX_ERROR) * 0) - 1);

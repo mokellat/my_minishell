@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   final_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 18:05:09 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/27 19:43:07 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/27 22:19:50 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char **str, int *start, int *end)
 		}
 		else
 		{
-			if (vars->is_quoted == 0 && *end != (vars->k - 1))
+			if (vars->is_quoted == 0 && *end != vars->k)
 				vars->arg = join(vars->arg, custom_substr(str[vars->i],
 							*end, vars->k, FALSE));
 			*start = vars->k;

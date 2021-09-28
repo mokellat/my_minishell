@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   space_fun_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 15:20:37 by mokellat          #+#    #+#             */
-/*   Updated: 2021/09/27 19:44:12 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/27 22:17:29 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,9 +121,7 @@ void	args_and_expand(t_pars_vars *vars, char **str)
 	if (end != vars->k)
 		vars->arg = join(vars->arg,
 				custom_substr(str[vars->i], end, vars->k, FALSE));
-	if (vars->dif == 1)
-		vars->arg = str[vars->i];
-	else if (vars->dif != 0 && !str_len(vars->arg))
+	if (vars->dif != 0 && !str_len(vars->arg))
 		vars->final_str[vars->i].is_empty_string_quoted = 1;
 	vars->final_str[vars->i].args[vars->y] = vars->arg;
 	vars->k = vars->j + 1;

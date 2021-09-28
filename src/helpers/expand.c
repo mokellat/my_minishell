@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mokellat <mokellat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 18:59:06 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/25 16:17:45 by mokellat         ###   ########.fr       */
+/*   Updated: 2021/09/27 20:42:31 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	get_var_value(T_STRING s, T_STRING *expanded_str, int *i, T_STRING *buff)
 		&& (ft_isalpha(s[*i]) || s[*i] == '_' || is_digit(s[*i])))
 		*buff = join_c(*buff, s[(*i)++]);
 	val = get_env(shell_ref(NULL), *buff);
-	val && (*expanded_str = join(*expanded_str, val));
+	if (val)
+		*expanded_str = join(*expanded_str, val);
 	return (0);
 }
 

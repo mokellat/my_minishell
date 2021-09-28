@@ -17,3 +17,6 @@ DONE:
         << 1 => seg
         >> 1 => seg
         > 1 => seg
+
+echo "'"'"'s'a'
+ls | rev | rev| rev | rev | rev | rev | rev| rev | rev | rev | rev | rev| rev | rev | rev | rev | rev| rev | rev | rev | rev | rev| rev | rev | rev | rev | rev| rev | rev | rev | rev | rev| rev | rev | rev | rev | rev| rev | rev | rev

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 12:16:50 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/27 19:34:50 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/27 20:41:23 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_signals(void)
 
 int	handle_ctrl_c(T_STRING *line, t_shell *shell)
 {
+	(void)line;
 	shell->ctrl_c_catched = false;
 	dup2(shell->stdin_fd_cpy, 0);
 	close(shell->stdin_fd_cpy);

@@ -6,7 +6,7 @@
 /*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 16:25:50 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/23 22:49:03 by hamza            ###   ########.fr       */
+/*   Updated: 2021/09/27 20:38:34 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@ static long	ft_digitnb(unsigned long long n)
 	if (n == 0)
 		return (1);
 	size = 0;
-	if (n < 0)
-	{
-		size++;
-		n = -n;
-	}
 	while (n != 0)
 	{
 		n /= 10;

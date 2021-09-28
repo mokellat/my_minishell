@@ -6,7 +6,7 @@
 /*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 05:50:16 by hamza             #+#    #+#             */
-/*   Updated: 2021/09/24 00:49:07 by hamza            ###   ########.fr       */
+/*   Updated: 2021/09/27 20:44:44 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,15 @@ int	red_in_source(t_file *f)
 	T_STRING	buff;
 	int			fd[2];
 
-	(pipe(fd) || 1) && (source = f->name);
+	pipe(fd);
+	source = f->name;
 	f->fd = fd[0];
 	buff = "";
 	while (1)
 	{
-		++shell_ref(NULL)->in_heredoc && (line = readline("> "));
+		// ++shell_ref(NULL)->in_heredoc && (line = readline("> "));
+		++shell_ref(NULL)->in_heredoc;
+		line = readline("> ");
 		shell_ref(NULL)->in_heredoc--;
 		if (shell_ref(NULL)->ctrl_c_catched == true)
 			return (handle_ctrl_c(&line, shell_ref(NULL)) * 0 - 1);
@@ -71,7 +74,8 @@ int	red_in_source(t_file *f)
 		buff = join(buff, "\n");
 		free(line);
 	}
-	buff && fput_str(buff, fd[1]);
+	if (buff)
+		fput_str(buff, fd[1]);
 	free(line);
 	return (0 * close(fd[1]));
 }

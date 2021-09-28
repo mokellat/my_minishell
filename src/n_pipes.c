@@ -1,12 +1,12 @@
-/* ************************************************************************** */
+	/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   n_pipes.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 16:50:04 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/27 19:34:12 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/27 20:40:30 by hamza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	exec_cmd(t_shell *shell, t_redir redir, t_cmd cmd, t_res res)
 		dup2(shell->out, STDOUT_FILENO);
 		close(shell->out);
 	}
-	close_all_pipes(shell->fd, shell->n - 1);
+	close(shell->fd[cmd.index][0]);
+	close(shell->fd[cmd.index][1]);
 	if (shell->n != 1)
 		res = execute_builtin_cmd(cmd, shell, &shell->is_builtin);
 	if (shell->is_builtin == TRUE && res.output)
@@ -85,17 +86,24 @@ void	catch_child_proc_exit_status(t_shell *shell)
 	}
 }
 
-void	name_it(int n, t_cmd *cmd, t_shell *shell, t_res *res)
+void	spawn_procs(int n, t_cmd *cmd, t_shell *shell, t_res *res)
 {
 	int	i;
 
 	i = -1;
+	shell->in = 0;
 	while (++i < n)
 	{
-		i == (n - 1) && (shell->last = TRUE);
-		i != (n - 1) && pipe(shell->fd[i]);
+		shell->fd[i][1] = -342332;
+		shell->fd[i][0] = -342332;
+		if (i == (n - 1))
+			shell->last = TRUE;
+		else
+			pipe(shell->fd[i]);
 		shell->out = shell->fd[i][1];
+		cmd[i].index = i;
 		res->status = spawn_proc(cmd[i], shell);
+		close(shell->fd[i][1]);
 		shell->in = shell->fd[i][0];
 	}
 }
@@ -113,11 +121,12 @@ t_res	fork_pipes(int n, t_cmd *cmd, t_shell *shell)
 		shell->fd[i] = sf_malloc(sizeof(int) * 2, ADD);
 	shell->last = FALSE;
 	shell->in = 0;
+	shell->out = 1;
 	shell->n = n;
-	name_it(n, cmd, shell, &res);
-	close_all_pipes(shell->fd, n - 1);
+	spawn_procs(n, cmd, shell, &res);
 	if (!shell->redir_has_error)
 		catch_child_proc_exit_status(shell);
+	close_all_pipes(shell->fd, n - 1);
 	shell->in_child = 0;
 	return (res);
 }
