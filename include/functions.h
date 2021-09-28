@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 18:02:21 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/27 19:34:35 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/28 18:22:15 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,5 @@ void		expand_and_delete_garbage(T_STRING *line);
 void		name_it(int n, t_cmd *cmd, t_shell *shell, t_res *res);
 void		close_all_pipes(int **fd, int n);
 int			run_heredoc(T_STRING *line, T_STRING *buff,
-T_STRING source, char is_quoted);
+				T_STRING source, char is_quoted);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 05:50:16 by hamza             #+#    #+#             */
-/*   Updated: 2021/09/27 20:44:44 by hamza            ###   ########.fr       */
+/*   Updated: 2021/09/28 18:20:42 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,21 +60,6 @@ int	red_in_source(t_file *f)
 	buff = "";
 	if (run_heredoc(&line, &buff, source, f->is_quoted) == -1)
 		return (-1);
-	// while (1)
-	// {
-	// 	++shell_ref(NULL)->in_heredoc;
-	// 	line = readline("> ");
-	// 	shell_ref(NULL)->in_heredoc--;
-	// 	if (shell_ref(NULL)->ctrl_c_catched == true)
-	// 		return (handle_ctrl_c(&line, shell_ref(NULL)) * 0 - 1);
-	// 	else if (!line || str_cmp(line, source))
-	// 		break ;
-	// 	if (f->is_quoted != SINGLE_QUOTE)
-	// 		expand_and_delete_garbage(&line);
-	// 	buff = join(buff, line);
-	// 	buff = join(buff, "\n");
-	// 	free(line);
-	// }
 	if (buff)
 		fput_str(buff, fd[1]);
 	free(line);
