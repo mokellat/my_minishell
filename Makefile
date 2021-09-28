@@ -37,13 +37,13 @@ LINUX_FLAGS  = -lreadline #-L /home/linuxbrew/.linuxbrew/opt/readline/lib  -I /h
 all: $(NAME)
 
 $(NAME): $(SRC)
-	@$(CC) ${FLAGS} -I include $(READLINE_FLAGS)  $(SRC)  -o $(NAME) -g   $(READLINE_FLAGS)
+	@$(CC) ${FLAGS} -I include $(READLINE_FLAGS)  $(SRC)  -o $(NAME) -g
 	@rm -rf *.o
 
 san :
-	@$(CC) $(DBG_FLAGS) ${FLAGS} -I include $(READLINE_FLAGS) $(SRC)  -o $(NAME) -g   $(READLINE_FLAGS)
+	@$(CC) $(DBG_FLAGS) ${FLAGS} -I include $(READLINE_FLAGS) $(SRC)  -o $(NAME) -g
 	@rm -rf *.o
-	
+
 $(OBJ): $(SRC)
 	@$(COMPILE)
 

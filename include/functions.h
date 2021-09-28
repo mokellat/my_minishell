@@ -74,4 +74,6 @@ char		**ft_reallocate(char **arr, int i);
 void		expand_and_delete_garbage(T_STRING *line);
 void		name_it(int n, t_cmd *cmd, t_shell *shell, t_res *res);
 void		close_all_pipes(int **fd, int n);
+int			run_heredoc(T_STRING *line, T_STRING *buff,
+T_STRING source, char is_quoted);
 #endif

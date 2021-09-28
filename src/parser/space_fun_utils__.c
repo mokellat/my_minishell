@@ -42,7 +42,8 @@ void	after_delimiter(t_pars_vars *vars, char **str)
 {
 	if (vars->y > 0)
 	{
-		vars->final_str[vars->i].args = ft_reallocate(vars->final_str[vars->i].args,
+		vars->final_str[vars->i].args
+			= ft_reallocate(vars->final_str[vars->i].args,
 				vars->final_str[vars->i].n);
 		vars->final_str[vars->i].n++;
 	}

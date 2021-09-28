@@ -6,7 +6,7 @@
 /*   By: hamza <hamza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 17:14:43 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/28 00:21:44 by hamza            ###   ########.fr       */
+/*   Updated: 2021/09/28 16:27:11 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,5 @@ void	shell_loop(t_shell *shell)
 			continue ;
 		}
 		result = fork_pipes(ret, cmds, shell);
-		printf("%d\n", result.status);
 	}
 }

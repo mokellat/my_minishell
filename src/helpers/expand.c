@@ -75,3 +75,26 @@ T_STRING	expand(T_STRING s)
 	}
 	return (expanded_str);
 }
+
+int	run_heredoc(T_STRING *line, T_STRING *buff,
+T_STRING source, char is_quoted)
+{
+	while (1)
+	{
+		++shell_ref(NULL)->in_heredoc;
+		*line = readline("> ");
+		shell_ref(NULL)->in_heredoc--;
+		if (shell_ref(NULL)->ctrl_c_catched == true)
+			return (handle_ctrl_c(&*line, shell_ref(NULL)) * 0 - 1);
+		if (!(*line) || str_cmp(*line, source))
+			break ;
+		if (!str_len(*line))
+			continue ;
+		if (!is_quoted)
+			expand_and_delete_garbage(&*line);
+		*buff = join(*buff, *line);
+		*buff = join(*buff, "\n");
+		free(*line);
+	}
+	return (0);
+}

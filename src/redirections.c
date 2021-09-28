@@ -58,22 +58,23 @@ int	red_in_source(t_file *f)
 	source = f->name;
 	f->fd = fd[0];
 	buff = "";
-	while (1)
-	{
-		// ++shell_ref(NULL)->in_heredoc && (line = readline("> "));
-		++shell_ref(NULL)->in_heredoc;
-		line = readline("> ");
-		shell_ref(NULL)->in_heredoc--;
-		if (shell_ref(NULL)->ctrl_c_catched == true)
-			return (handle_ctrl_c(&line, shell_ref(NULL)) * 0 - 1);
-		else if (!line || str_cmp(line, source))
-			break ;
-		if (f->is_quoted != SINGLE_QUOTE)
-			expand_and_delete_garbage(&line);
-		buff = join(buff, line);
-		buff = join(buff, "\n");
-		free(line);
-	}
+	if (run_heredoc(&line, &buff, source, f->is_quoted) == -1)
+		return (-1);
+	// while (1)
+	// {
+	// 	++shell_ref(NULL)->in_heredoc;
+	// 	line = readline("> ");
+	// 	shell_ref(NULL)->in_heredoc--;
+	// 	if (shell_ref(NULL)->ctrl_c_catched == true)
+	// 		return (handle_ctrl_c(&line, shell_ref(NULL)) * 0 - 1);
+	// 	else if (!line || str_cmp(line, source))
+	// 		break ;
+	// 	if (f->is_quoted != SINGLE_QUOTE)
+	// 		expand_and_delete_garbage(&line);
+	// 	buff = join(buff, line);
+	// 	buff = join(buff, "\n");
+	// 	free(line);
+	// }
 	if (buff)
 		fput_str(buff, fd[1]);
 	free(line);

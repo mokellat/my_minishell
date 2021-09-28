@@ -1,4 +1,4 @@
-	/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   n_pipes.c                                          :+:      :+:    :+:   */
@@ -124,9 +124,9 @@ t_res	fork_pipes(int n, t_cmd *cmd, t_shell *shell)
 	shell->out = 1;
 	shell->n = n;
 	spawn_procs(n, cmd, shell, &res);
+	close_all_pipes(shell->fd, n - 1);
 	if (!shell->redir_has_error)
 		catch_child_proc_exit_status(shell);
-	close_all_pipes(shell->fd, n - 1);
 	shell->in_child = 0;
 	return (res);
 }

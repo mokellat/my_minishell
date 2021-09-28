@@ -40,9 +40,8 @@ t_bool	is_digit(char c)
 
 char	**ft_reallocate(char **arr, int i)
 {
-	char	**new_map;
-	int		j;
-	static	int	k;
+	char		**new_map;
+	int			j;
 
 	j = 0;
 	new_map = sf_malloc((i + 1) * sizeof(T_STRING), ADD);
@@ -51,9 +50,7 @@ char	**ft_reallocate(char **arr, int i)
 		new_map[j] = ft_strdup(arr[j]);
 		j++;
 	}
-	// if (k++ != 0)
-	(void)k;
-		new_map[j] = NULL;
+	new_map[j] = NULL;
 	free(arr);
 	return (new_map);
 }

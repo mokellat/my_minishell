@@ -27,7 +27,6 @@ void	change_cur_dir(t_shell *shell)
 	}
 	cmd_pwd(shell, NULL, 0);
 	index = vector_find(&shell->env.keys, "PWD");
-	printf("%d\n", index);
 	vector_set(&shell->env.values, index, shell->curr_dir);
 }
 

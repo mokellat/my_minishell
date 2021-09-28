@@ -43,8 +43,8 @@ typedef struct s_shell
 	int			exit_code;
 	t_bool		print_nl;
 	T_STRING	term;
-	t_res		(*(*cmds)(int i))(struct s_shell *this,
-		T_STRING *args, int n);
+	t_res		(*(*cmds)(int i))(struct s_shell * this,
+		T_STRING * args, int n);
 	int			status_code;
 	int			n_flag;
 	T_STRING	cmd;
@@ -64,7 +64,7 @@ typedef struct s_shell
 }				t_shell;
 
 T_STRING	*init_cmds_str(void);
-t_res		(*cmds(int i))(t_shell *shell, char **args, int n);
+t_res (*cmds(int i))(t_shell * shell, char **args, int n);
 t_res		cmd_exit(t_shell *shell, T_STRING *args, int n);
 t_res		cmd_pwd(t_shell *shell, T_STRING *args, int n);
 t_res		cmd_cd(t_shell *shell, T_STRING *args, int n);
