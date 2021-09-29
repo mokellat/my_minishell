@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 18:59:06 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/29 11:45:56 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/29 14:38:04 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ T_STRING	expand(T_STRING s)
 
 	len = str_len(s);
 	i = -1;
-	expanded_str = strdup("");
+	expanded_str = str_dup("");
 	while (++i < len)
 	{
 		buff = "";
@@ -85,11 +85,17 @@ T_STRING source, char is_quoted)
 		*line = readline("> ");
 		shell_ref(NULL)->in_heredoc--;
 		if (shell_ref(NULL)->ctrl_c_catched == true)
-			return (handle_ctrl_c(&*line, shell_ref(NULL)) * 0 - 1);
+		{
+			free(*line);
+			return (handle_ctrl_c(line, shell_ref(NULL)) * 0 - 1);
+		}
 		if (!(*line) || str_cmp(*line, source))
 			break ;
 		if (!str_len(*line))
+		{
+			free(*line);
 			continue ;
+		}
 		if (!is_quoted)
 			expand_and_delete_garbage(&*line);
 		*buff = join(*buff, *line);
