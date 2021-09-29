@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 17:14:43 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/29 11:46:24 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/29 15:57:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,10 @@ void	shell_loop(t_shell *shell)
 	{
 		line = readline("minishell$ ");
 		if (line && !*line)
+		{
+			free(line);
 			continue ;
+		}
 		else if (!line)
 			break ;
 		add_history(line);

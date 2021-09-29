@@ -1,6 +1,6 @@
 NAME		= 	minishell
 CC			=	gcc
-FLAGS	  	= 	-Werror -Wextra -Wall
+FLAGS	  	= #	-Werror -Wextra -Wall
 
 UTILS		=	strtools_0.c strtools_4.c strtools_1.c strtools_2.c\
 					split.c ft_itoa.c sf_malloc.c strtools_3.c
@@ -32,7 +32,7 @@ READLINE_FLAGS = -lreadline -L ~/.brew/opt/readline/lib  -I ~/.brew/opt/readline
 all: $(NAME)
 
 $(NAME): $(SRC)
-	@$(CC) ${FLAGS} -I include $(READLINE_FLAGS)  $(SRC)  -o $(NAME) -g
+	@$(CC) ${FLAGS} -I include $(READLINE_FLAGS)  $(SRC)  -o $(NAME) -g  $(READLINE_FLAGS)
 
 clean:
 	@rm -rf ${OBJ}
