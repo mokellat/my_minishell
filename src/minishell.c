@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 09:53:58 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/29 14:35:58 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/29 15:29:04 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ int	main(int ac, char **argv, char **env_vars)
 	(void)ac;
 	shell.n_flag = 0;
 	shell_ref(&shell);
-	if (str_cmp(argv[1], "-c") == TRUE)
-	{
-		shell.n_flag = 1;
-		shell.cmd = argv[2];
-	}
 	init_shell(&shell, env_vars);
 	shell_loop(&shell);
 	if (!shell.is_exit_printed)

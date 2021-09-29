@@ -6,11 +6,24 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 17:18:05 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/20 18:46:55 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/29 15:35:22 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	is_all(T_STRING	str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[++i])
+	{
+		if (c != str[i])
+			return (0);
+	}
+	return (1);
+}
 
 int	look_for_flags(t_shell *shell, T_STRING *args, int n)
 {
@@ -22,7 +35,7 @@ int	look_for_flags(t_shell *shell, T_STRING *args, int n)
 	while (i < n)
 	{
 		flag = sub_str(args[i], 0, 2);
-		if (!str_cmp(flag, "-n"))
+		if (!str_cmp(flag, "-n") || !is_all(args[i], 'n'))
 			break ;
 		shell->print_nl = FALSE;
 		i++;

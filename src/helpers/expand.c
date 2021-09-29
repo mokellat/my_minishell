@@ -6,7 +6,7 @@
 /*   By: hmellahi <hmellahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 18:59:06 by hmellahi          #+#    #+#             */
-/*   Updated: 2021/09/29 14:38:04 by hmellahi         ###   ########.fr       */
+/*   Updated: 2021/09/29 15:01:25 by hmellahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,6 @@ T_STRING source, char is_quoted)
 		}
 		if (!(*line) || str_cmp(*line, source))
 			break ;
-		if (!str_len(*line))
-		{
-			free(*line);
-			continue ;
-		}
 		if (!is_quoted)
 			expand_and_delete_garbage(&*line);
 		*buff = join(*buff, *line);
